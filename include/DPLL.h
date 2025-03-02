@@ -6,4 +6,4 @@
 bool unitPropagation(SATInstance& instance);
 bool DPLL(SATInstance& instance);
 
-#endif // DPLL_H
+#endif 
