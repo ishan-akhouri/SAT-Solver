@@ -37,6 +37,45 @@ bool unitPropagation(SATInstance& instance) {
 }
 
 /*
+pureLiteralElimination optimizes SAT solving by removing pure literals early.
+
+A literal is pure if it appears in only one polarity (always positive or always negative).
+Since pure literals cannot contribute to conflicts, they can be immediately assigned
+and all clauses containing them can be removed, reducing the search space.
+
+Steps:
+1. Scan the formula to identify all literals.
+2. Find literals that do not appear in both positive and negative forms.
+3. Assign pure literals immediately and remove affected clauses.
+4. Continue solving with a reduced formula.
+*/
+void pureLiteralElimination(SATInstance& instance) {
+    std::unordered_map<int, bool> seenLiterals;
+
+    //Identify Pure Literals
+    for (const auto& clause : instance.formula) {
+        for (int literal : clause) {
+            seenLiterals[literal] = true;
+        }
+    }
+
+    std::vector<int> pureLiterals;
+    for (const auto& [literal, _] : seenLiterals) {
+        if (seenLiterals.find(-literal) == seenLiterals.end()) {
+            pureLiterals.push_back(literal);
+        }
+    }
+
+    //Assign Pure Literals & Remove Their Clauses
+    for (int literal : pureLiterals) {
+        instance.assignments[abs(literal)] = (literal > 0);
+        instance.formula.erase(std::remove_if(instance.formula.begin(), instance.formula.end(),
+            [literal](const Clause& c) { return std::find(c.begin(), c.end(), literal) != c.end(); }),
+            instance.formula.end());
+    }
+}
+
+/*
 DPLL recursively solves SAT with two base cases:
 1. If the formula is empty, return true (SAT).
 2. If any clause is empty, return false (UNSAT).
@@ -54,7 +93,8 @@ bool DPLL(SATInstance& instance) {
         if (clause.empty()) return false;
     }
 
-    // Apply Unit Propagation
+    // Apply optimizations
+    pureLiteralElimination(instance);
     unitPropagation(instance);
 
     // Pick a variable to assign (first unassigned one)
