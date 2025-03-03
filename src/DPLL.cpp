@@ -91,13 +91,22 @@ It applies optimizations, picks an unassigned variable, and tries both true and 
 If neither works, return false (UNSAT).
 */
 
+int dpll_calls = 0; //Global counter of recursive calls
+int backtracks = 0; //Global counter of backtracks;
+
 bool DPLL(SATInstance& instance) {
+
+    dpll_calls++;
     // Base Case: All clauses satisfied
     if (instance.formula.empty()) return true;
     
     // Base Case: Found an empty clause → UNSAT
     for (const auto& clause : instance.formula) {
-        if (clause.empty()) return false;
+        if (clause.empty())
+        {   backtracks++; //We backtrack when we hit UNSAT
+            return false;
+        }
+            
     }
 
     // Apply optimizations
