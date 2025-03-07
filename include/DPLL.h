@@ -9,4 +9,4 @@ extern int backtracks;
 bool unitPropagation(SATInstance& instance);
 bool DPLL(SATInstance& instance);
 
-#endif 
+#endif

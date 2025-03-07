@@ -5,25 +5,19 @@
 #include <unordered_map>
 #include <iostream>
 
-// This file defines a data structure to represent a Boolean SAT problem in CNF form, with support for storing variable assignments and printing the formula.
+using Clause = std::vector<int>;  // A clause is a disjunction (OR) of literals
+using CNF = std::vector<Clause>;  // A CNF formula is a conjunction (AND) of clauses
 
-using Clause = std::vector<int>; // Clause is a vector of integers, where each integer represents a literal
-using CNF = std::vector<Clause>;// CNF is a vector of clauses, which together form the CNF formula
+struct SATInstance {
+    CNF formula;                             // The formula in CNF form
+    std::unordered_map<int, bool> assignments; // Variable assignments (var → value)
 
-struct SATInstance // Represents a SAT problem in Conjunctive Normal Form (CNF)
-{
-    CNF formula; // Stores the formula as a list of clauses 
-    std::unordered_map<int, bool> assignments; //Hashmap where keys are variable numbers, values are boolean values representing their assignments
+    SATInstance(const CNF &f) : formula(f) {}
 
-    SATInstance(const CNF &f) : formula(f) {} // Initialize formula with f
-
-    void print() 
-    {
+    void print() {
         std::cout << "SAT Problem in CNF:\n";
-        for (const auto& clause : formula) // Loop through clauses
-        {
-            for (int literal : clause) // Loop through each literal in the clause, print it
-            {
+        for (const auto& clause : formula) {
+            for (int literal : clause) {
                 std::cout << (literal > 0 ? "x" : "~x") << abs(literal) << " ";
             }
             std::cout << "\n";
@@ -32,4 +26,3 @@ struct SATInstance // Represents a SAT problem in Conjunctive Normal Form (CNF)
 };
 
 #endif
-
