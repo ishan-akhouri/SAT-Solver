@@ -1,63 +1,111 @@
 #include <iostream>
+#include <chrono>
+#include <iomanip>
+#include <string>
 #include "../include/SATInstance.h"
 #include "../include/DPLL.h"
-#include <chrono>
-#include <iomanip> // For std::setw
+#include "../include/CDCL.h"
+
+enum SolverType {
+    DPLL_SOLVER,
+    CDCL_SOLVER
+};
 
 int main(int argc, char* argv[]) {
     bool debug_mode = false;
+    SolverType solver_type = CDCL_SOLVER; // Default to CDCL
     
     // Process command line arguments
     for (int i = 1; i < argc; i++) {
         std::string arg = argv[i];
         if (arg == "--debug" || arg == "-d") {
             debug_mode = true;
+        } else if (arg == "--dpll") {
+            solver_type = DPLL_SOLVER;
+        } else if (arg == "--cdcl") {
+            solver_type = CDCL_SOLVER;
         }
     }
     
-    std::cout << "SAT Solver (VSIDS) Benchmarks" << std::endl;
+    std::cout << "SAT Solver Benchmarks" << std::endl;
+    std::cout << "Algorithm: " << (solver_type == DPLL_SOLVER ? "DPLL with VSIDS" : "CDCL with Non-Chronological Backtracking") << std::endl;
     std::cout << (debug_mode ? "Debug mode: ON\n" : "Debug mode: OFF\n");
     
-    // Define a helper function for running benchmarks
+    // Define a helper function for running benchmarks with either solver
     auto runBenchmark = [&](const std::string& name, const CNF& cnf) {
         std::cout << "\n----------------------------------------\n";
         std::cout << "Testing " << name << ":\n";
         
-        // Reset performance counters
-        dpll_calls = 0;
-        backtracks = 0;
+        bool result = false;
+        double elapsed_time = 0.0;
         
-        // Create instance
-        SATInstance instance(cnf, debug_mode);
-        if (debug_mode) instance.print();
-        instance.initializeVSIDS();
-        
-        // Timing
-        auto start = std::chrono::high_resolution_clock::now();
-        bool result = DPLL(instance);
-        auto end = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double, std::milli> elapsed = end - start;
-        
-        // Print results in a formatted table
-        std::cout << "Result:         " << (result ? "SATISFIABLE" : "UNSATISFIABLE") << std::endl;
-        std::cout << "Execution Time: " << std::fixed << std::setprecision(3) << elapsed.count() << " ms" << std::endl;
-        std::cout << "Recursive Calls: " << dpll_calls << std::endl;
-        std::cout << "Backtracks:     " << backtracks << std::endl;
-        
-        // Print variable assignments if debug mode and satisfiable
-        if (debug_mode && result) {
-            std::cout << "\nVariable Assignments:\n";
-            for (const auto& [var, val] : instance.assignments) {
-                std::cout << "x" << var << " = " << val << "\n";
+        if (solver_type == DPLL_SOLVER) {
+            // Reset performance counters
+            dpll_calls = 0;
+            backtracks = 0;
+            
+            // Create instance
+            SATInstance instance(cnf, debug_mode);
+            if (debug_mode) instance.print();
+            instance.initializeVSIDS();
+            
+            // Timing
+            auto start = std::chrono::high_resolution_clock::now();
+            result = DPLL(instance);
+            auto end = std::chrono::high_resolution_clock::now();
+            std::chrono::duration<double, std::milli> elapsed = end - start;
+            elapsed_time = elapsed.count();
+            
+            // Print results in a formatted table
+            std::cout << "Result:         " << (result ? "SATISFIABLE" : "UNSATISFIABLE") << std::endl;
+            std::cout << "Execution Time: " << std::fixed << std::setprecision(3) << elapsed_time << " ms" << std::endl;
+            std::cout << "Recursive Calls: " << dpll_calls << std::endl;
+            std::cout << "Backtracks:     " << backtracks << std::endl;
+            
+            // Print variable assignments if debug mode and satisfiable
+            if (debug_mode && result) {
+                std::cout << "\nVariable Assignments:\n";
+                for (const auto& [var, val] : instance.assignments) {
+                    std::cout << "x" << var << " = " << val << "\n";
+                }
+            }
+        } else { // CDCL_SOLVER
+            // Create CDCL solver
+            CDCLSolver solver(cnf, debug_mode);
+            
+            // Timing
+            auto start = std::chrono::high_resolution_clock::now();
+            result = solver.solve();
+            auto end = std::chrono::high_resolution_clock::now();
+            std::chrono::duration<double, std::milli> elapsed = end - start;
+            elapsed_time = elapsed.count();
+            
+            // Print results
+            std::cout << "Result:         " << (result ? "SATISFIABLE" : "UNSATISFIABLE") << std::endl;
+            std::cout << "Execution Time: " << std::fixed << std::setprecision(3) << elapsed_time << " ms" << std::endl;
+            std::cout << "Conflicts:      " << solver.getConflicts() << std::endl;
+            std::cout << "Decisions:      " << solver.getDecisions() << std::endl;
+            std::cout << "Propagations:   " << solver.getPropagations() << std::endl;
+            std::cout << "Learned Clauses: " << solver.getLearnedClauses() << std::endl;
+            std::cout << "Max Decision Level: " << solver.getMaxDecisionLevel() << std::endl;
+            std::cout << "Restarts:       " << solver.getRestarts() << std::endl;
+            
+            // Print variable assignments if debug mode and satisfiable
+            if (debug_mode && result) {
+                std::cout << "\nVariable Assignments:\n";
+                auto assignments = solver.getAssignments();
+                for (const auto& [var, val] : assignments) {
+                    std::cout << "x" << var << " = " << val << "\n";
+                }
             }
         }
         
-        return elapsed.count();
+        return elapsed_time;
     };
     
     // Test 1: Simple Satisfiable Formula
     CNF exampleCNF = {{1, 2}, {-1, 3}, {-2, -3}};
-    runBenchmark("Simple Satisfiable CNF", exampleCNF);
+    double simpleCNFTime = runBenchmark("Simple Satisfiable CNF", exampleCNF);
     
     // Test 2: 4-Queens Problem
     CNF queensCNF = {
@@ -220,11 +268,55 @@ int main(int argc, char* argv[]) {
         // Print summary comparison
         std::cout << "\n----------------------------------------\n";
         std::cout << "Performance Summary:\n";
+        std::cout << "Simple CNF Time: " << std::fixed << std::setprecision(3) << simpleCNFTime << " ms\n";
         std::cout << "4-Queens Time:  " << std::fixed << std::setprecision(3) << queensTime << " ms\n";
         std::cout << "8-Queens Time:  " << std::fixed << std::setprecision(3) << queens8Time << " ms\n";
         std::cout << "Time Ratio (8-Queens/4-Queens): " << std::fixed << std::setprecision(2) 
                   << queens8Time / queensTime << "x\n";
         std::cout << "Pigeonhole Time: " << std::fixed << std::setprecision(3) << pigeonholeTime << " ms\n";
+        
+        // Add more challenging benchmarks for CDCL if needed
+        if (solver_type == CDCL_SOLVER) {
+            // Random 3-SAT benchmarks with varying clause-to-variable ratios
+            std::cout << "\n----------------------------------------\n";
+            std::cout << "Running Random 3-SAT benchmarks...\n";
+            
+            auto generateRandom3SAT = [](int num_vars, double clause_ratio) -> CNF {
+                CNF formula;
+                int num_clauses = static_cast<int>(num_vars * clause_ratio);
+                
+                // Initialize random seed
+                std::srand(static_cast<unsigned int>(std::time(nullptr)));
+                
+                for (int i = 0; i < num_clauses; i++) {
+                    Clause clause;
+                    // Generate 3 distinct literals for the clause
+                    while (clause.size() < 3) {
+                        int var = (std::rand() % num_vars) + 1; // Variables start from 1
+                        int lit = (std::rand() % 2) == 0 ? var : -var; // Randomly negate
+                        
+                        // Ensure no duplicate literals in the clause
+                        if (std::find(clause.begin(), clause.end(), lit) == clause.end() &&
+                            std::find(clause.begin(), clause.end(), -lit) == clause.end()) {
+                            clause.push_back(lit);
+                        }
+                    }
+                    formula.push_back(clause);
+                }
+                return formula;
+            };
+            
+            // Benchmark with different clause-to-variable ratios
+            const int num_vars = 100;
+            const std::vector<double> ratios = {3.0, 4.0, 4.25, 4.5, 5.0}; // Phase transition around 4.25
+            
+            for (double ratio : ratios) {
+                CNF random_formula = generateRandom3SAT(num_vars, ratio);
+                std::string benchmark_name = "Random 3-SAT (n=" + std::to_string(num_vars) + 
+                                             ", ratio=" + std::to_string(ratio) + ")";
+                runBenchmark(benchmark_name, random_formula);
+            }
+        }
     }
     
     return 0;

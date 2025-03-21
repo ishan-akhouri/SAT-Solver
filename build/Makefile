@@ -129,6 +129,30 @@ sat_solver/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/build
 .PHONY : sat_solver/fast
 
+src/CDCL.o: src/CDCL.cpp.o
+.PHONY : src/CDCL.o
+
+# target to build an object file
+src/CDCL.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/CDCL.cpp.o
+.PHONY : src/CDCL.cpp.o
+
+src/CDCL.i: src/CDCL.cpp.i
+.PHONY : src/CDCL.i
+
+# target to preprocess a source file
+src/CDCL.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/CDCL.cpp.i
+.PHONY : src/CDCL.cpp.i
+
+src/CDCL.s: src/CDCL.cpp.s
+.PHONY : src/CDCL.s
+
+# target to generate assembly for a file
+src/CDCL.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/CDCL.cpp.s
+.PHONY : src/CDCL.cpp.s
+
 src/DPLL.o: src/DPLL.cpp.o
 .PHONY : src/DPLL.o
 
@@ -186,6 +210,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... sat_solver"
+	@echo "... src/CDCL.o"
+	@echo "... src/CDCL.i"
+	@echo "... src/CDCL.s"
 	@echo "... src/DPLL.o"
 	@echo "... src/DPLL.i"
 	@echo "... src/DPLL.s"
