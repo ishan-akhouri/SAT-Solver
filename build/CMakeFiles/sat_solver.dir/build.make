@@ -114,11 +114,56 @@ CMakeFiles/sat_solver.dir/src/CDCL.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sat_solver.dir/src/CDCL.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/sat_solver/src/CDCL.cpp -o CMakeFiles/sat_solver.dir/src/CDCL.cpp.s
 
+CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.o: CMakeFiles/sat_solver.dir/flags.make
+CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.o: /Users/ishan/sat_solver/src/ClauseDatabase.cpp
+CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.o: CMakeFiles/sat_solver.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.o -MF CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.o.d -o CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.o -c /Users/ishan/sat_solver/src/ClauseDatabase.cpp
+
+CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/sat_solver/src/ClauseDatabase.cpp > CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.i
+
+CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/sat_solver/src/ClauseDatabase.cpp -o CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.s
+
+CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.o: CMakeFiles/sat_solver.dir/flags.make
+CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.o: /Users/ishan/sat_solver/src/CDCLSolverIncremental.cpp
+CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.o: CMakeFiles/sat_solver.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.o -MF CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.o.d -o CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.o -c /Users/ishan/sat_solver/src/CDCLSolverIncremental.cpp
+
+CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/sat_solver/src/CDCLSolverIncremental.cpp > CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.i
+
+CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/sat_solver/src/CDCLSolverIncremental.cpp -o CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.s
+
+CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.o: CMakeFiles/sat_solver.dir/flags.make
+CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.o: /Users/ishan/sat_solver/src/ClauseMinimizer.cpp
+CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.o: CMakeFiles/sat_solver.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.o -MF CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.o.d -o CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.o -c /Users/ishan/sat_solver/src/ClauseMinimizer.cpp
+
+CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/sat_solver/src/ClauseMinimizer.cpp > CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.i
+
+CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/sat_solver/src/ClauseMinimizer.cpp -o CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.s
+
 # Object files for target sat_solver
 sat_solver_OBJECTS = \
 "CMakeFiles/sat_solver.dir/src/main.cpp.o" \
 "CMakeFiles/sat_solver.dir/src/DPLL.cpp.o" \
-"CMakeFiles/sat_solver.dir/src/CDCL.cpp.o"
+"CMakeFiles/sat_solver.dir/src/CDCL.cpp.o" \
+"CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.o" \
+"CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.o" \
+"CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.o"
 
 # External object files for target sat_solver
 sat_solver_EXTERNAL_OBJECTS =
@@ -126,9 +171,12 @@ sat_solver_EXTERNAL_OBJECTS =
 sat_solver: CMakeFiles/sat_solver.dir/src/main.cpp.o
 sat_solver: CMakeFiles/sat_solver.dir/src/DPLL.cpp.o
 sat_solver: CMakeFiles/sat_solver.dir/src/CDCL.cpp.o
+sat_solver: CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.o
+sat_solver: CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.o
+sat_solver: CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.o
 sat_solver: CMakeFiles/sat_solver.dir/build.make
 sat_solver: CMakeFiles/sat_solver.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable sat_solver"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable sat_solver"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/sat_solver.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

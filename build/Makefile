@@ -129,12 +129,26 @@ sat_solver/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/build
 .PHONY : sat_solver/fast
 
+#=============================================================================
+# Target rules for targets named sat_solver_incremental
+
+# Build rule for target.
+sat_solver_incremental: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sat_solver_incremental
+.PHONY : sat_solver_incremental
+
+# fast build rule for target.
+sat_solver_incremental/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/build
+.PHONY : sat_solver_incremental/fast
+
 src/CDCL.o: src/CDCL.cpp.o
 .PHONY : src/CDCL.o
 
 # target to build an object file
 src/CDCL.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/CDCL.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/CDCL.cpp.o
 .PHONY : src/CDCL.cpp.o
 
 src/CDCL.i: src/CDCL.cpp.i
@@ -143,6 +157,7 @@ src/CDCL.i: src/CDCL.cpp.i
 # target to preprocess a source file
 src/CDCL.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/CDCL.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/CDCL.cpp.i
 .PHONY : src/CDCL.cpp.i
 
 src/CDCL.s: src/CDCL.cpp.s
@@ -151,7 +166,89 @@ src/CDCL.s: src/CDCL.cpp.s
 # target to generate assembly for a file
 src/CDCL.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/CDCL.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/CDCL.cpp.s
 .PHONY : src/CDCL.cpp.s
+
+src/CDCLSolverIncremental.o: src/CDCLSolverIncremental.cpp.o
+.PHONY : src/CDCLSolverIncremental.o
+
+# target to build an object file
+src/CDCLSolverIncremental.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/CDCLSolverIncremental.cpp.o
+.PHONY : src/CDCLSolverIncremental.cpp.o
+
+src/CDCLSolverIncremental.i: src/CDCLSolverIncremental.cpp.i
+.PHONY : src/CDCLSolverIncremental.i
+
+# target to preprocess a source file
+src/CDCLSolverIncremental.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/CDCLSolverIncremental.cpp.i
+.PHONY : src/CDCLSolverIncremental.cpp.i
+
+src/CDCLSolverIncremental.s: src/CDCLSolverIncremental.cpp.s
+.PHONY : src/CDCLSolverIncremental.s
+
+# target to generate assembly for a file
+src/CDCLSolverIncremental.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/CDCLSolverIncremental.cpp.s
+.PHONY : src/CDCLSolverIncremental.cpp.s
+
+src/ClauseDatabase.o: src/ClauseDatabase.cpp.o
+.PHONY : src/ClauseDatabase.o
+
+# target to build an object file
+src/ClauseDatabase.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/ClauseDatabase.cpp.o
+.PHONY : src/ClauseDatabase.cpp.o
+
+src/ClauseDatabase.i: src/ClauseDatabase.cpp.i
+.PHONY : src/ClauseDatabase.i
+
+# target to preprocess a source file
+src/ClauseDatabase.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/ClauseDatabase.cpp.i
+.PHONY : src/ClauseDatabase.cpp.i
+
+src/ClauseDatabase.s: src/ClauseDatabase.cpp.s
+.PHONY : src/ClauseDatabase.s
+
+# target to generate assembly for a file
+src/ClauseDatabase.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/ClauseDatabase.cpp.s
+.PHONY : src/ClauseDatabase.cpp.s
+
+src/ClauseMinimizer.o: src/ClauseMinimizer.cpp.o
+.PHONY : src/ClauseMinimizer.o
+
+# target to build an object file
+src/ClauseMinimizer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/ClauseMinimizer.cpp.o
+.PHONY : src/ClauseMinimizer.cpp.o
+
+src/ClauseMinimizer.i: src/ClauseMinimizer.cpp.i
+.PHONY : src/ClauseMinimizer.i
+
+# target to preprocess a source file
+src/ClauseMinimizer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/ClauseMinimizer.cpp.i
+.PHONY : src/ClauseMinimizer.cpp.i
+
+src/ClauseMinimizer.s: src/ClauseMinimizer.cpp.s
+.PHONY : src/ClauseMinimizer.s
+
+# target to generate assembly for a file
+src/ClauseMinimizer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/ClauseMinimizer.cpp.s
+.PHONY : src/ClauseMinimizer.cpp.s
 
 src/DPLL.o: src/DPLL.cpp.o
 .PHONY : src/DPLL.o
@@ -159,6 +256,7 @@ src/DPLL.o: src/DPLL.cpp.o
 # target to build an object file
 src/DPLL.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/DPLL.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/DPLL.cpp.o
 .PHONY : src/DPLL.cpp.o
 
 src/DPLL.i: src/DPLL.cpp.i
@@ -167,6 +265,7 @@ src/DPLL.i: src/DPLL.cpp.i
 # target to preprocess a source file
 src/DPLL.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/DPLL.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/DPLL.cpp.i
 .PHONY : src/DPLL.cpp.i
 
 src/DPLL.s: src/DPLL.cpp.s
@@ -175,6 +274,7 @@ src/DPLL.s: src/DPLL.cpp.s
 # target to generate assembly for a file
 src/DPLL.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/DPLL.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/DPLL.cpp.s
 .PHONY : src/DPLL.cpp.s
 
 src/main.o: src/main.cpp.o
@@ -201,6 +301,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/main_incremental.o: src/main_incremental.cpp.o
+.PHONY : src/main_incremental.o
+
+# target to build an object file
+src/main_incremental.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/main_incremental.cpp.o
+.PHONY : src/main_incremental.cpp.o
+
+src/main_incremental.i: src/main_incremental.cpp.i
+.PHONY : src/main_incremental.i
+
+# target to preprocess a source file
+src/main_incremental.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/main_incremental.cpp.i
+.PHONY : src/main_incremental.cpp.i
+
+src/main_incremental.s: src/main_incremental.cpp.s
+.PHONY : src/main_incremental.s
+
+# target to generate assembly for a file
+src/main_incremental.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/main_incremental.cpp.s
+.PHONY : src/main_incremental.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -210,15 +334,28 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... sat_solver"
+	@echo "... sat_solver_incremental"
 	@echo "... src/CDCL.o"
 	@echo "... src/CDCL.i"
 	@echo "... src/CDCL.s"
+	@echo "... src/CDCLSolverIncremental.o"
+	@echo "... src/CDCLSolverIncremental.i"
+	@echo "... src/CDCLSolverIncremental.s"
+	@echo "... src/ClauseDatabase.o"
+	@echo "... src/ClauseDatabase.i"
+	@echo "... src/ClauseDatabase.s"
+	@echo "... src/ClauseMinimizer.o"
+	@echo "... src/ClauseMinimizer.i"
+	@echo "... src/ClauseMinimizer.s"
 	@echo "... src/DPLL.o"
 	@echo "... src/DPLL.i"
 	@echo "... src/DPLL.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/main_incremental.o"
+	@echo "... src/main_incremental.i"
+	@echo "... src/main_incremental.s"
 .PHONY : help
 
 
