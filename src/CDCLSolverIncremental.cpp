@@ -14,10 +14,10 @@ CDCLSolverIncremental::CDCLSolverIncremental(const CNF& formula, bool debug)
       var_inc(1.0),
       var_decay(0.95),
       conflicts_since_restart(0),
-      restart_threshold(100),
-      restart_multiplier(1.5),
+      restart_threshold(50),
+      restart_multiplier(1.1),
       luby_index(1),
-      use_luby_restarts(true),
+      use_luby_restarts(false),
       last_solved_until(-1),
       conflicts(0),
       decisions(0),
@@ -248,19 +248,16 @@ bool CDCLSolverIncremental::solve(const std::vector<int>& assume) {
             stuck_counter++;
             no_progress_count++;
             
-            // If stuck for too long, try a restart
-            if (stuck_counter > 200) { // Increased from 50
-                if (debug_output) {
-                    std::cout << "No progress for " << stuck_counter << " iterations, forcing restart.\n";
-                }
-                
-                // If we've restarted too many times consecutively, try a more aggressive restart
-                if (consecutive_restarts > 10) { // Increased from 3
+            // Exponential backoff for corrective actions
+            int corrective_action = 1 << std::min(10, stuck_counter/50);
+            
+            if (stuck_counter % corrective_action == 0) {
+                if (consecutive_restarts > 3) {
                     if (debug_output) {
-                        std::cout << "Too many consecutive restarts, clearing learned clauses.\n";
+                        std::cout << "Too many consecutive restarts, reducing learned clauses.\n";
                     }
-                    // Clear learned clauses and reset VSIDS scores
-                    db->clearLearnedClauses();
+                    // Remove 50% of learned clauses and reset VSIDS scores
+                    db->reduceDB(0.5);
                     initializeVSIDS();
                     consecutive_restarts = 0;
                 } else {
@@ -270,7 +267,7 @@ bool CDCLSolverIncremental::solve(const std::vector<int>& assume) {
             }
             
             // If stuck at the same decision level for too long, force backtrack
-            if (stuck_at_level_count > 400) { // Increased from 100
+            if (stuck_at_level_count > 100) {
                 if (debug_output) {
                     std::cout << "Stuck at decision level " << decision_level << " for too long, forcing backtrack.\n";
                 }
@@ -280,7 +277,7 @@ bool CDCLSolverIncremental::solve(const std::vector<int>& assume) {
             }
             
             // If still stuck after multiple restarts, return UNSAT
-            if (no_progress_count > 2000) { // Increased from 500
+            if (no_progress_count > 500) {
                 if (debug_output) {
                     std::cout << "Solver appears to be stuck after " << iterations << " iterations.\n";
                     std::cout << "Last progress: " << no_progress_count << " iterations ago.\n";
@@ -904,11 +901,11 @@ void CDCLSolverIncremental::backtrack(int level) {
 
 // Make a new decision
 bool CDCLSolverIncremental::makeDecision() {
-    // Use VSIDS to select the next variable
+    // Select the next unassigned variable
     int var = selectVarVSIDS();
     
     if (var == 0) {
-        // No unassigned variables left - this is crucial to prevent infinite loops
+        // No unassigned variables left
         if (debug_output) {
             std::cout << "No unassigned variables left for decisions.\n";
         }
@@ -920,37 +917,17 @@ bool CDCLSolverIncremental::makeDecision() {
     max_decision_level = std::max(max_decision_level, decision_level);
     decisions++;
     
-    // Determine phase (true or false) based on phase saving or sign heuristic
-    bool value = true; // Default phase
-    
+    // Determine phase (true or false) based on phase saving
+    bool value = true;
     if (use_phase_saving) {
-        // Use stored phase if available
         auto it = activity.find(var);
-        if (it != activity.end()) {
-            value = (it->second > 0); // Positive activity means true phase
-        }
+        value = (it != activity.end()) ? (it->second > 0) : true;
         
-        // For variables without a stored phase, use a dynamic strategy
-        if (it == activity.end() || std::abs(it->second) < 0.1) {
-            // For 8-Queens and similar problems, try to distribute true assignments
-            // Count how many variables are assigned true in the current row
-            int row = (var - 1) / 8;  // Assuming 8x8 board
-            int true_count = 0;
-            for (int col = 0; col < 8; col++) {
-                int v = row * 8 + col + 1;
-                auto assign_it = assignments.find(v);
-                if (assign_it != assignments.end() && assign_it->second) {
-                    true_count++;
-                }
-            }
-            
-            // If we already have a queen in this row, prefer false
-            if (true_count > 0) {
-                value = false;
-            } else {
-                // Otherwise, use a pseudo-random choice based on the variable number
-                value = ((var * 19 + decision_level * 7) % 2) == 0;
-            }
+        // Add small random noise
+        static std::mt19937 gen(std::random_device{}());
+        std::uniform_real_distribution<> dis(0.0, 0.1);
+        if (dis(gen) < 0.05) { // 5% chance to flip
+            value = !value;
         }
     }
     
@@ -997,6 +974,7 @@ bool CDCLSolverIncremental::isSatisfied() const {
         if (!clause_satisfied) {
             return false;
         }
+        
     }
     
     // All clauses are satisfied
@@ -1078,6 +1056,9 @@ void CDCLSolverIncremental::bumpVarActivity(int var) {
 
 // Decay variable activities
 void CDCLSolverIncremental::decayVarActivities() {
+    for (auto& [var, act] : activity) {
+        act *= var_decay;
+    }
     var_inc /= var_decay;
 }
 

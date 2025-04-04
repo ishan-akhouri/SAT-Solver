@@ -135,6 +135,9 @@ public:
             std::cout << "Cleared learned clauses. Database now has " << num_original << " original clauses.\n";
         }
     }
+    
+    // Reduce the learned clause database by a fraction (0 < fraction < 1)
+    void reduceDB(double fraction);
 };
 
 #endif // CLAUSE_DATABASE_H

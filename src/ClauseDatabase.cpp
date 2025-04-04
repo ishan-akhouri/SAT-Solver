@@ -403,6 +403,31 @@ void ClauseDatabase::clearAssumptions() {
     // For now, it's a placeholder
 }
 
+void ClauseDatabase::reduceDB(double fraction) {
+    if (fraction <= 0 || fraction >= 1) return;
+
+    // Sort learned clauses by LBD (highest first)
+    std::sort(learned_clauses.begin(), learned_clauses.end(),
+        [this](const ClauseRef& a, const ClauseRef& b) {
+            return a->lbd > b->lbd;
+        });
+    
+    // Calculate new size and remove worst clauses
+    size_t new_size = learned_clauses.size() * fraction;
+    for (size_t i = new_size; i < learned_clauses.size(); i++) {
+        // Find the clause ID by its position in the clauses vector
+        auto it = std::find(clauses.begin(), clauses.end(), learned_clauses[i]);
+        if (it != clauses.end()) {
+            removeClause(std::distance(clauses.begin(), it));
+        }
+    }
+    learned_clauses.resize(new_size);
+
+    if (debug_output) {
+        std::cout << "Reduced learned clauses by " << fraction * 100 << "%\n";
+    }
+}
+
 std::vector<int> ClauseDatabase::extractCoreAssumptions(const Clause& conflict) {
     // This would be implemented for incremental solving
     // For now, return the conflict clause literals as core assumptions

@@ -558,72 +558,76 @@ void demonstrateIncrementalSolving() {
 
 // Benchmark performance on random instances
 void benchmarkRandomInstances() {
-    std::cout << "===== Random 3-SAT Benchmark =====\n\n";
+    std::cout << "===== Random 3-SAT Benchmark Across Phase Transition =====\n\n";
     
     const int NUM_INSTANCES = 10;
     const int NUM_VARS = 100;
-    const double ratio = 3.0; // Phase transition around 4.25
+    const std::vector<double> ratios = {3.0, 3.5, 4.0, 4.25, 4.5, 5.0};
     
-    std::cout << "Testing ratio = " << std::fixed << std::setprecision(3) << ratio 
-              << " (typically SATISFIABLE):\n";
+    for (double ratio : ratios) {
+        std::cout << "Testing ratio = " << std::fixed << std::setprecision(3) << ratio << "\n";
     
-    int sat_count = 0;
-    int timed_out = 0;
-    double total_time = 0.0;
-    
-    for (int instance = 0; instance < NUM_INSTANCES; instance++) {
-        // Generate a new random 3-SAT instance
-        CNF formula = generateRandom3SAT(NUM_VARS, ratio);
+        int sat_count = 0;
+        int timed_out = 0;
+        double total_time = 0.0;
+        int total_conflicts = 0;
+        int total_learned = 0;
+        int total_restarts = 0;
+        int total_decisions = 0;
         
-        // Create a new solver instance for each formula
-        CDCLSolverIncremental solver(formula);
-        
-        auto start = std::chrono::high_resolution_clock::now();
-        bool result = false;
-        
-        try {
-            // Run the solver with a timeout thread if possible
-            // Otherwise, just rely on the solver's internal timeout
+        for (int instance = 0; instance < NUM_INSTANCES; instance++) {
+            CNF formula = generateRandom3SAT(NUM_VARS, ratio);
+            CDCLSolverIncremental solver(formula);
+            
+            auto start = std::chrono::high_resolution_clock::now();
+            bool result = false;
+            
             result = solver.solve();
             auto end = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double, std::milli> elapsed = end - start;
             
-            // Skip instances that take too long (backup safety)
-            if (elapsed.count() > 5000.0) { // 5 seconds
-                std::cout << "Instance " << (instance + 1) << ": TIMEOUT\n";
+            if (elapsed.count() > 5000.0) { // 10 second timeout
+                std::cout << "Instance " << (instance + 1) << ": TIMEOUT after " 
+                        << std::fixed << std::setprecision(3) << elapsed.count() << " ms\n";
                 timed_out++;
                 continue;
             }
             
-            // Print results
-            std::cout << "Instance " << (instance + 1) << ": " 
-                    << (result ? "SAT" : "UNSAT") 
-                    << " in " << std::fixed << std::setprecision(3) << elapsed.count() << " ms "
-                    << "(conflicts: " << solver.getConflicts() 
-                    << ", learned: " << solver.getNumLearnts() << ")\n";
+            if (!result) {
+                std::cout << "Instance " << (instance + 1) << ": UNSAT in " 
+                        << std::fixed << std::setprecision(3) << elapsed.count() << " ms "
+                        << "(conflicts: " << solver.getConflicts() 
+                        << ", learned: " << solver.getNumLearnts() 
+                        << ", restarts: " << solver.getRestarts() << ")\n";
+            } else {
+                std::cout << "Instance " << (instance + 1) << ": SAT in " 
+                        << std::fixed << std::setprecision(3) << elapsed.count() << " ms "
+                        << "(conflicts: " << solver.getConflicts() 
+                        << ", learned: " << solver.getNumLearnts() 
+                        << ", restarts: " << solver.getRestarts() << ")\n";
+                sat_count++;
+            }
             
-            if (result) sat_count++;
+            // Always record timing and stats (even for timeouts)
             total_time += elapsed.count();
+            total_conflicts += solver.getConflicts();
+            total_learned += solver.getNumLearnts();
+            total_restarts += solver.getRestarts();
+            total_decisions += solver.getDecisions();
             
-        } catch (...) {
-            // Safety catch in case the solver crashes
-            std::cout << "Instance " << (instance + 1) << ": CRASHED\n";
-            timed_out++;
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
         
-        // Add a small delay between instances to ensure proper cleanup
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    }
-    
-    // Print summary
-    std::cout << "Summary for ratio " << ratio << ":\n";
-    std::cout << "  SAT instances: " << sat_count << "/" << (NUM_INSTANCES - timed_out) << "\n";
-    std::cout << "  Timed out: " << timed_out << "/" << NUM_INSTANCES << "\n";
-    if (NUM_INSTANCES - timed_out > 0) {
-        std::cout << "  Average time: " << (total_time / (NUM_INSTANCES - timed_out)) << " ms\n";
-    } else {
-        std::cout << "  Average time: N/A (all timed out)\n";
-    }
+        // Enhanced summary output
+        std::cout << "\nSummary for ratio " << ratio << ":\n";
+        std::cout << "  SAT ratio: " << sat_count << "/" << (NUM_INSTANCES - timed_out) << "\n";
+        std::cout << "  Avg time: " << (total_time/(NUM_INSTANCES - timed_out)) << " ms\n";
+        std::cout << "  Avg conflicts: " << (total_conflicts/(NUM_INSTANCES - timed_out)) << "\n";
+        std::cout << "  Avg learned clauses: " << (total_learned/(NUM_INSTANCES - timed_out)) << "\n";
+        std::cout << "  Avg restarts: " << (total_restarts/(NUM_INSTANCES - timed_out)) << "\n";
+        std::cout << "  Avg decisions: " << (total_decisions/(NUM_INSTANCES - timed_out)) << "\n";
+        std::cout << "  Timed out: " << timed_out << "/" << NUM_INSTANCES << "\n\n";
+}
 }
 
 // Demonstrate clause minimization techniques
@@ -811,8 +815,8 @@ int main(int argc, char* argv[]) {
             std::cout << "Available commands: incremental, benchmarks, random, minimization, unsat-core, enumerate, debug\n";
         }
     } else {
-        // Run all demonstrations by default
-        runAllDemonstrations();
+        // Run random instances by default
+        benchmarkRandomInstances();
     }
     
     return 0;
