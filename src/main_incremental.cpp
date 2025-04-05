@@ -815,8 +815,8 @@ int main(int argc, char* argv[]) {
             std::cout << "Available commands: incremental, benchmarks, random, minimization, unsat-core, enumerate, debug\n";
         }
     } else {
-        // Run random instances by default
-        benchmarkRandomInstances();
+        // Run all demonstrations by default
+        runAllDemonstrations();
     }
     
     return 0;
