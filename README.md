@@ -1,14 +1,15 @@
-# Advanced SAT Solver with DPLL, CDCL, and Incremental Solving
+# Advanced SAT Solver with DPLL, CDCL, Incremental Solving, and Portfolio Parallelism
 
-A C++ implementation of modern SAT solving algorithms for Boolean satisfiability problems, featuring DPLL with VSIDS, a full CDCL implementation with non-chronological backtracking, and a state-of-the-art incremental SAT solver with sophisticated clause database management.
+A C++ implementation of modern SAT solving algorithms for Boolean satisfiability problems, featuring DPLL with VSIDS, a full CDCL implementation with non-chronological backtracking, a state-of-the-art incremental SAT solver with sophisticated clause database management, and a parallel portfolio-based approach for handling challenging instances.
 
 ## Overview
 
-This SAT solver efficiently determines whether a given Boolean formula in conjunctive normal form (CNF) is satisfiable. The implementation includes three major solving approaches:
+This SAT solver efficiently determines whether a given Boolean formula in conjunctive normal form (CNF) is satisfiable. The implementation includes four major solving approaches:
 
 1. **DPLL Algorithm with VSIDS**: The classic Davis–Putnam–Logemann–Loveland algorithm enhanced with Variable State Independent Decaying Sum heuristic
 2. **CDCL with Non-Chronological Backtracking**: A modern Conflict-Driven Clause Learning implementation that significantly outperforms DPLL on complex problems
 3. **Incremental CDCL Solver**: A sophisticated incremental solver with reference-counted clause database management, optimized for solving sequences of related formulas efficiently
+4. **Portfolio-based Parallel Solver**: A multi-configuration parallel approach that runs diverse solver instances simultaneously to tackle hard problems efficiently
 
 ## Features
 
@@ -39,6 +40,25 @@ This SAT solver efficiently determines whether a given Boolean formula in conjun
   - Literal Block Distance (LBD) metrics
   - Smart clause deletion policies
 
+### Portfolio-based Parallel Solver
+- **Diversified solver configurations** running in parallel:
+  - Multiple CDCL configurations with different parameter settings
+  - Configurations optimized for different problem structures
+  - Special configurations for hard random 3-SAT instances near the phase transition
+- **Resource management**:
+  - Dynamic allocation of computational resources
+  - Memory-aware solver scheduling
+  - Adaptive timeouts based on problem characteristics
+- **Performance monitoring**:
+  - Real-time tracking of solver progress
+  - Detection and resolution of stalled solvers
+  - Early termination once any solver finds a solution
+- **Phase transition specialization**:
+  - Customized configurations for the critical clause-to-variable ratio (~4.25)
+  - Adaptive parameter tuning based on problem ratio
+- **Robust timeout handling** to prevent excessive runtime
+- **Comprehensive statistics** for solver performance analysis and comparison
+
 ### Performance Features
 - **Efficient memory management** with reference counting for clauses
 - **Sophisticated watch list implementation** for unit propagation
@@ -53,20 +73,23 @@ This SAT solver efficiently determines whether a given Boolean formula in conjun
 ```
 .
 ├── include/
-│   ├── SATInstance.h         # Common SAT problem representation with VSIDS
-│   ├── DPLL.h                # DPLL algorithm header
-│   ├── CDCL.h                # CDCL algorithm header
+│   ├── SATInstance.h             # Common SAT problem representation with VSIDS
+│   ├── DPLL.h                    # DPLL algorithm header
+│   ├── CDCL.h                    # CDCL algorithm header
 │   ├── CDCLSolverIncremental.h   # Incremental CDCL solver header
-│   ├── ClauseDatabase.h      # Reference-counted clause database
-│   └── ClauseMinimizer.h     # Clause minimization techniques
+│   ├── ClauseDatabase.h          # Reference-counted clause database
+│   ├── ClauseMinimizer.h         # Clause minimization techniques
+│   └── PortfolioManager.h        # Portfolio-based parallel solver
 ├── src/
-│   ├── DPLL.cpp              # DPLL algorithm implementation
-│   ├── CDCL.cpp              # CDCL algorithm implementation
+│   ├── DPLL.cpp                  # DPLL algorithm implementation
+│   ├── CDCL.cpp                  # CDCL algorithm implementation
 │   ├── CDCLSolverIncremental.cpp # Incremental CDCL solver implementation
-│   ├── ClauseDatabase.cpp    # Clause database implementation
-│   ├── ClauseMinimizer.cpp   # Clause minimization techniques
-│   ├── main.cpp              # Main test harness for standard SAT solving
-│   ├── main_incremental.cpp  # Main test harness for incremental SAT solving
+│   ├── ClauseDatabase.cpp        # Clause database implementation
+│   ├── ClauseMinimizer.cpp       # Clause minimization techniques
+│   ├── PortfolioManager.cpp      # Portfolio-based parallel solver implementation
+│   ├── main.cpp                  # Main test harness for standard SAT solving
+│   ├── main_incremental.cpp      # Main test harness for incremental SAT solving
+│   ├── main_portfolio.cpp        # Main test harness for portfolio solver
 │   └── IncrementalQueensSolver.cpp # Example application (N-Queens)
 └── README.md
 ```
@@ -112,6 +135,30 @@ The incremental solver extends CDCL with sophisticated clause database managemen
 5. **State preservation**: Learned clauses, variable activities, and phase information persist across solving calls
 
 This paradigm shift is critical for applications like bounded model checking, planning problems, and interactive constraint solving, where we repeatedly solve related formulas with small variations.
+
+### Portfolio-based Parallel Solving
+
+The portfolio-based parallel solver addresses challenging SAT instances by:
+
+1. **Diverse Configuration Approach**: Running multiple solver instances with diverse parameter settings simultaneously
+2. **Problem-Specific Optimization**:
+   - Configurations tailored for random 3-SAT problems
+   - Special handling for the phase transition region
+   - Clause ratio-based parameter tuning
+3. **Resource Management**:
+   - Memory-aware solver scheduling
+   - Dynamic resource allocation based on system capabilities
+   - Load balancing between concurrent solvers
+4. **Performance Monitoring**:
+   - Continuous tracking of solver progress
+   - Stuck detection with adaptive intervention
+   - Early termination once any solver succeeds
+5. **Results Aggregation**:
+   - Optimal solution extraction
+   - Performance analysis across configurations
+   - Identification of most effective strategies
+
+The portfolio approach is particularly effective for hard random instances and problems near the phase transition region where the optimal strategy is not known in advance.
 
 ### VSIDS (Variable State Independent Decaying Sum)
 
@@ -185,6 +232,25 @@ Run the program:
 ./sat_solver_incremental debug                 # Run basic debugging tests
 ```
 
+### Portfolio-based Parallel Solver
+
+Compile the portfolio solver:
+
+```bash
+g++ -std=c++17 -o sat_solver_portfolio src/main_portfolio.cpp src/PortfolioManager.cpp src/CDCLSolverIncremental.cpp src/ClauseDatabase.cpp src/ClauseMinimizer.cpp -Iinclude -pthread
+```
+
+Run the program:
+
+```bash
+./sat_solver_portfolio                         # Run default benchmark
+./sat_solver_portfolio phase                   # Run phase transition benchmark
+./sat_solver_portfolio scale                   # Run scaling benchmark
+./sat_solver_portfolio config                  # Run configuration effectiveness benchmark
+./sat_solver_portfolio custom 100 5 120        # Run custom benchmark (100 vars, 5 instances, 120s timeout)
+./sat_solver_portfolio help                    # Show usage information
+```
+
 ### Using the Solver in Your Code
 
 #### Standard CDCL:
@@ -234,6 +300,34 @@ if (!result) {
 }
 ```
 
+#### Portfolio-based Parallel Solving:
+
+```cpp
+#include "PortfolioManager.h"
+
+// Create a formula in CNF
+CNF formula = {{1, 2}, {-1, 3}, {-2, -3}};
+
+// Create portfolio solver with 5-minute timeout
+auto timeout = std::chrono::minutes(5);
+PortfolioManager portfolio(formula, std::chrono::duration_cast<std::chrono::milliseconds>(timeout));
+
+// Solve with portfolio approach
+bool result = portfolio.solve(formula);
+
+// Get the solution if satisfiable
+if (result) {
+    const auto& solution = portfolio.getSolution();
+}
+
+// Get statistics about solver performance
+const auto& stats = portfolio.getSolverStatistics();
+int winning_solver = portfolio.getWinningSolverId();
+
+// Print detailed performance statistics
+portfolio.printStatistics();
+```
+
 ## Example Input Format
 
 A Boolean formula in CNF is represented as a vector of clauses, where each clause is a vector of integers. Positive integers represent positive literals, and negative integers represent negated literals.
@@ -255,6 +349,9 @@ The program includes several test cases:
 6. **Random 3-SAT**: Randomly generated instances with varying clause-to-variable ratios to test solver robustness
 7. **Incremental 3-Colorability**: Demonstrates incremental solving with graph coloring
 8. **UNSAT Core Extraction**: Shows how to identify minimal sets of contradictory assumptions
+9. **Phase Transition Benchmark**: Tests portfolio performance across the SAT phase transition region
+10. **Scaling Benchmark**: Evaluates portfolio performance with increasing problem sizes
+11. **Configuration Effectiveness**: Analyzes which solver configurations perform best for different problem types
 
 The random 3-SAT tests include instances around the phase transition (clause-to-variable ratio of approximately 4.25), where problems are typically hardest to solve.
 
@@ -283,25 +380,51 @@ For Incremental CDCL:
 - State preservation effectiveness
 - Incremental solving efficiency
 
+For Portfolio-based Solver:
+- Time to solution for each configuration
+- Number of conflicts/decisions/propagations per configuration
+- Distribution of winning configurations across problem types
+- Effectiveness at the phase transition region
+- Scaling behavior with problem size
+- Resource utilization statistics
+- Load balancing effectiveness
+
 ## Real-World Applications
 
-The incremental solver is particularly well-suited for:
+The different solver implementations are suited for various applications:
 
-1. **Bounded Model Checking**: Verify increasingly longer execution paths
-2. **Planning Problems**: Add constraints incrementally as the plan unfolds
-3. **Circuit Verification**: Check properties with incremental constraints
-4. **Interactive Constraint Solving**: Add user constraints in real-time
-5. **N-Queens Solving**: Find all solutions for the N-Queens problem
-6. **Graph Coloring**: Incrementally add edges and verify colorability
+### CDCL Solver
+- General-purpose SAT solving
+- Hardware verification
+- Software testing
+- Cryptanalysis
+
+### Incremental Solver
+- **Bounded Model Checking**: Verify increasingly longer execution paths
+- **Planning Problems**: Add constraints incrementally as the plan unfolds
+- **Circuit Verification**: Check properties with incremental constraints
+- **Interactive Constraint Solving**: Add user constraints in real-time
+- **N-Queens Solving**: Find all solutions for the N-Queens problem
+- **Graph Coloring**: Incrementally add edges and verify colorability
+
+### Portfolio-based Parallel Solver
+- **Hard Random 3-SAT**: Tackle challenging random instances effectively
+- **Phase Transition Problems**: Efficiently solve problems around the critical region
+- **Computationally Intensive Verification**: Leverage multiple cores for faster verification
+- **Time-Critical Applications**: Get answers faster through parallelism
+- **Problem Structure Discovery**: Identify which solving strategies work best for specific problem classes
+- **SAT Competitions**: Gain robustness across diverse benchmark categories
 
 ## Next Steps
 
 Future enhancements planned for this solver include:
-- **Parallelization Strategies**: Multithreading implementation and portfolio-based parallel solving
+- **Advanced Portfolio Strategies**: Implement clause sharing between solvers and adaptive configuration selection
+- **Distributed Computing Support**: Enable solving across multiple machines
 - **Advanced Preprocessing Techniques**: Variable and clause elimination, subsumption, etc.
 - **MaxSAT Extensions**: Core-guided MaxSAT algorithms and optimization capabilities
 - **QBF Solving**: Quantified Boolean Formula solving for PSPACE-hard problems
 - **Comprehensive Benchmarking and Analysis**: Performance against SAT competition benchmarks
+- **Machine Learning Integration**: Predict optimal solver configurations for given problem characteristics
 
 ## License
 
