@@ -110,11 +110,15 @@ void PortfolioManager::initializeConfigs() {
 
 // Main solving method
 bool PortfolioManager::solve(const CNF& formula) {
-    // Reset state
-    solution_found = false;
-    winning_solver_id = -1;
+    // Reset state with proper synchronization
+    {
+        std::lock_guard<std::mutex> lock(result_mutex);
+        solution_found = false;
+        winning_solver_id = -1;
+    }
     active_solvers = 0;
     initialization_complete = false;
+
     
     // Calculate formula ratio
     size_t num_vars = 0;
@@ -196,6 +200,7 @@ void PortfolioManager::solverThread(int solver_id, const CNF& formula) {
                   << ", decisions: " << solver.getDecisions() 
                   << ", restarts: " << solver.getRestarts() << ")\n";
         
+        bool need_termination = false;
         // Record result if solution found
         if (result) {
             std::lock_guard<std::mutex> lock(result_mutex);
@@ -204,11 +209,13 @@ void PortfolioManager::solverThread(int solver_id, const CNF& formula) {
                 best_solution = solver.getAssignments();
                 winning_solver_id = solver_id;
                 solver_statistics[solver_id].termination_reason = 0;  // Solution found
+                need_termination = true;
                 
-                // Signal all solvers to terminate
-                terminateAllSolvers();
             }
         }
+
+        // Call terminate outside the lock to prevent potential deadlock
+        if (need_termination) terminateAllSolvers();
         
         // Record statistics with the actual solver time
         recordStatistics(solver_id, solver, solve_time);
@@ -281,15 +288,17 @@ void PortfolioManager::configureSolver(CDCLSolverIncremental& solver, int config
 bool PortfolioManager::checkResourceAvailability() {
     std::unique_lock<std::mutex> lock(resource_mutex);
     
-    // Wait until we have resources available or should terminate
-    while (active_solvers >= max_concurrent_solvers && !shouldTerminate()) {
-        resource_cv.wait_for(lock, std::chrono::seconds(1), [this] {
-            return active_solvers < max_concurrent_solvers || shouldTerminate();
-        });
-    }
+    // Use predicate version of wait_for to handle spurious wakeups
+    bool has_resources = resource_cv.wait_for(lock, std::chrono::seconds(1), [this] {
+        return active_solvers < max_concurrent_solvers || shouldTerminate();
+    });
     
     if (shouldTerminate()) {
         return false;
+    }
+    
+    if (!has_resources) {
+        return false;  // Still no resources available
     }
     
     active_solvers.fetch_add(1);
@@ -310,9 +319,12 @@ bool PortfolioManager::shouldTerminate() const {
 }
 
 void PortfolioManager::terminateAllSolvers() {
-    std::lock_guard<std::mutex> lock(termination_mutex);
-    global_timeout = true;  // Signal all threads to stop
-    termination_cv.notify_all();
+    {
+        std::lock_guard<std::mutex> lock(termination_mutex);
+        global_timeout = true;
+        termination_cv.notify_all();
+    }
+    // Notify resource waiters outside the termination_mutex lock
     resource_cv.notify_all();
 }
 
