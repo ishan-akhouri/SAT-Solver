@@ -105,6 +105,9 @@ public:
     size_t getNumLearnedClauses() const;
     size_t getNumVariables() const;
 
+    // Add variable
+    int addVariable();
+
     // Utilities
     void printStatistics() const;
     void printWatches() const;

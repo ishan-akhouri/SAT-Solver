@@ -26,9 +26,10 @@ CDCLSolverIncremental::CDCLSolverIncremental(const CNF &formula, bool debug)
       max_decision_level(0),
       use_lbd(true),
       use_phase_saving(true),
-      debug_output(debug),
+      debug_output(false),
       timeout_duration(std::chrono::milliseconds(30000)), // 30 second timeout
-      stuck_counter(0)
+      stuck_counter(0),
+      conflict_clause_id(0)
 { // Initialize stuck counter
 
     // Find the number of variables in the formula
@@ -106,6 +107,16 @@ bool CDCLSolverIncremental::solve(const std::vector<int> &assume)
         }
     }
 
+    // Clear trail and variable states for a fresh start
+    trail.clear();
+    var_to_trail.clear();
+    assignments.clear();
+    for (size_t i = 0; i < decision_levels.size(); i++) {
+        decision_levels[i] = 0;
+    }
+    decision_level = 0;
+    conflicts_since_restart = 0;
+
     // Initialize watches if this is a fresh solve
     if (last_solved_until == -1)
     {
@@ -149,22 +160,57 @@ bool CDCLSolverIncremental::solve(const std::vector<int> &assume)
             std::cout << "Conflict during initial unit propagation, formula is UNSAT\n";
         }
 
+        conflicts++; // Increment conflict counter
+
         // Extract UNSAT core from the conflict
         Clause learned_clause;
-        analyzeConflict(db->clauses.size() - 1, learned_clause);
+        int backtrack_level = analyzeConflict(conflict_clause_id, learned_clause);
+
+        // Calculate LBD if enabled
+        int lbd = use_lbd ? db->computeLBD(learned_clause, decision_levels) : learned_clause.size();
+
+        // Add the learned clause to the database
+        db->addLearnedClause(learned_clause, lbd);
+
+        // Bump VSIDS scores for variables in the learned clause
+        for (int lit : learned_clause)
+        {
+            bumpVarActivity(std::abs(lit));
+        }
+
+        // Decay VSIDS scores
+        decayVarActivities();
 
         // Extract the core assumptions
         core.clear();
-        for (int lit : learned_clause)
+        for (int assumption : assumptions)
         {
-            int var = std::abs(lit);
-            // Check if this is an assumption
-            for (int assumption : assumptions)
-            {
-                if (std::abs(assumption) == var)
-                {
-                    core.push_back(-lit); // Negated literal from clause
+            int var = std::abs(assumption);
+            
+            // Check if this variable appears in the learned clause with correct polarity
+            bool var_in_learned_clause = false;
+            for (int learned_lit : learned_clause) {
+                // Check for exact literal match to respect polarity
+                if (learned_lit == -assumption) {
+                    var_in_learned_clause = true;
                     break;
+                }
+            }
+            
+            if (!var_in_learned_clause) {
+                continue;  // Skip this assumption if not in learned clause
+            }
+
+            // Now check if it was assigned as an assumption at level 0
+            auto trail_it = var_to_trail.find(var);
+            if (trail_it != var_to_trail.end())
+            {
+                const auto &node = trail[trail_it->second];
+
+                // Include this assumption if it was assigned at level 0
+                if (node.decision_level == 0 && node.is_decision)
+                {
+                    core.push_back(assumption);
                 }
             }
         }
@@ -358,20 +404,38 @@ bool CDCLSolverIncremental::solve(const std::vector<int> &assume)
 
                 // Extract UNSAT core from the conflict
                 Clause learned_clause;
-                analyzeConflict(db->clauses.size() - 1, learned_clause);
+                analyzeConflict(conflict_clause_id, learned_clause);
 
                 // Extract the core assumptions
                 core.clear();
-                for (int lit : learned_clause)
+                for (int assumption : assumptions)
                 {
-                    int var = std::abs(lit);
-                    // Check if this is an assumption
-                    for (int assumption : assumptions)
-                    {
-                        if (std::abs(assumption) == var)
-                        {
-                            core.push_back(-lit); // Negated literal from clause
+                    int var = std::abs(assumption);
+                    
+                    // Check if this variable appears in the learned clause with correct polarity
+                    bool var_in_learned_clause = false;
+                    for (int learned_lit : learned_clause) {
+                        // Check for exact literal match to respect polarity
+                        if (learned_lit == -assumption) {
+                            var_in_learned_clause = true;
                             break;
+                        }
+                    }
+                    
+                    if (!var_in_learned_clause) {
+                        continue;  // Skip this assumption if not in learned clause
+                    }
+
+                    // Now check if it was assigned as an assumption at level 0
+                    auto trail_it = var_to_trail.find(var);
+                    if (trail_it != var_to_trail.end())
+                    {
+                        const auto &node = trail[trail_it->second];
+
+                        // Include this assumption if it was assigned at level 0
+                        if (node.decision_level == 0 && node.is_decision)
+                        {
+                            core.push_back(assumption);
                         }
                     }
                 }
@@ -381,7 +445,7 @@ bool CDCLSolverIncremental::solve(const std::vector<int> &assume)
 
             // Analyze conflict and learn a new clause
             Clause learned_clause;
-            int backtrack_level = analyzeConflict(db->clauses.size() - 1, learned_clause);
+            int backtrack_level = analyzeConflict(conflict_clause_id, learned_clause);
 
             // Check timeout after conflict analysis
             if (checkTimeout())
@@ -437,6 +501,8 @@ bool CDCLSolverIncremental::solve(const std::vector<int> &assume)
     // Return UNSAT as a conservative approach
     return false;
 }
+
+
 
 // Add a permanent clause to the formula
 void CDCLSolverIncremental::addClause(const Clause &clause)
@@ -702,12 +768,26 @@ bool CDCLSolverIncremental::unitPropagate()
                                   << existing_assignment->second << " and " << value << "\n";
                     }
 
-                    // Create a binary conflict clause representing the contradiction
-                    Clause conflict_clause = {other_lit, -other_lit};
+                    // Find the clause that assigned the variable to its current value
+                    ClauseID conflicting_clause_id = std::numeric_limits<ClauseID>::max();
+                    for (size_t i = 0; i < trail.size(); i++)
+                    {
+                        const auto &node = trail[i];
+                        if (std::abs(node.literal) == var)
+                        {
+                            conflicting_clause_id = node.antecedent_id;
+                            break;
+                        }
+                    }
 
-                    // Add the conflict clause to the database for analysis
-                    db->addClause(conflict_clause);
+                    // If we couldn't find the conflicting clause, use the current clause
+                    if (conflicting_clause_id == std::numeric_limits<ClauseID>::max())
+                    {
+                        conflicting_clause_id = clause_id; // Current clause ID
+                    }
 
+                    // Set the conflict clause ID
+                    conflict_clause_id = conflicting_clause_id;
                     return false;
                 }
 
@@ -740,9 +820,8 @@ bool CDCLSolverIncremental::unitPropagate()
                     std::cout << "\n";
                 }
 
-                // Add conflict clause to the end of the database for conflict analysis
-                db->addClause(clause->literals);
-
+                // Store conflicting clause ID for conflict analysis
+                conflict_clause_id = clause_id;
                 return false;
             }
         }
@@ -803,8 +882,8 @@ bool CDCLSolverIncremental::unitPropagate()
                 std::cout << "\n";
             }
 
-            // Use this clause as the conflict clause
-            db->addClause(clause);
+            // Store conflicting clause ID for conflict analysis
+            conflict_clause_id = i;
             return false;
         }
 
@@ -825,12 +904,26 @@ bool CDCLSolverIncremental::unitPropagate()
                               << existing_assignment->second << " and " << value << "\n";
                 }
 
-                // Create a binary conflict clause
-                Clause conflict_clause = {last_unassigned_lit, -last_unassigned_lit};
+                // Find the clause that assigned the variable to its current value
+                ClauseID conflicting_clause_id = std::numeric_limits<ClauseID>::max();
+                for (size_t j = 0; j < trail.size(); j++)
+                {
+                    const auto &node = trail[j];
+                    if (std::abs(node.literal) == var)
+                    {
+                        conflicting_clause_id = node.antecedent_id;
+                        break;
+                    }
+                }
 
-                // Add the conflict clause to the database for analysis
-                db->addClause(conflict_clause);
+                // If we couldn't find the conflicting clause, use the current clause
+                if (conflicting_clause_id == std::numeric_limits<ClauseID>::max())
+                {
+                    conflicting_clause_id = i; // Current clause ID
+                }
 
+                // Set the conflict clause ID
+                conflict_clause_id = conflicting_clause_id;
                 return false;
             }
 
@@ -868,14 +961,11 @@ int CDCLSolverIncremental::analyzeConflict(ClauseID conflict_id, Clause &learned
         std::cout << "\n";
     }
 
-    // Pre-allocate vectors to avoid reallocations
-    std::vector<int> current_level_vars;
-    current_level_vars.reserve(db->getNumVariables());
-
     // Initialize the learned clause with the conflict clause
     learned_clause = db->clauses[conflict_id]->literals;
 
     // Count literals from the current decision level
+    std::unordered_set<int> current_level_vars;
     for (int lit : learned_clause)
     {
         int var = std::abs(lit);
@@ -885,7 +975,7 @@ int CDCLSolverIncremental::analyzeConflict(ClauseID conflict_id, Clause &learned
             const auto &node = trail[it->second];
             if (node.decision_level == decision_level)
             {
-                current_level_vars.push_back(var);
+                current_level_vars.insert(var);
             }
         }
     }
@@ -898,44 +988,40 @@ int CDCLSolverIncremental::analyzeConflict(ClauseID conflict_id, Clause &learned
     // Find the second highest decision level in the clause
     int backtrack_level = 0;
 
+    // Create a vector of trail indices for variables at the current decision level
+    // for deterministic processing
+    std::vector<size_t> current_level_indices;
+    for (int var : current_level_vars)
+    {
+        auto it = var_to_trail.find(var);
+        if (it != var_to_trail.end())
+        {
+            current_level_indices.push_back(it->second);
+        }
+    }
+
+    // Sort indices in reverse order for deterministic processing
+    std::sort(current_level_indices.begin(), current_level_indices.end(), 
+              [](size_t a, size_t b) { return a > b; });
+
     // Resolve the conflict by combining with antecedent clauses
-    size_t trail_index = trail.size() - 1;
-    while (current_level_vars.size() > 1)
+    size_t trail_index_pos = 0;
+    while (current_level_vars.size() > 1 && trail_index_pos < current_level_indices.size())
     { // Keep one literal from current level for UIP
-        // Find the most recent assignment in the learned clause
-        while (trail_index > 0)
-        {
-            const auto &node = trail[trail_index];
-            int var = std::abs(node.literal);
-
-            // Check if this variable is in the learned clause
-            if (std::find(current_level_vars.begin(), current_level_vars.end(), var) != current_level_vars.end() &&
-                !node.is_decision && node.decision_level == decision_level)
-            {
-                // Found a non-decision variable from the current level to resolve with
-                break;
-            }
-
-            trail_index--;
-        }
-
-        if (trail_index == 0)
-        {
-            // Couldn't find a suitable variable, abort
-            break;
-        }
-
-        // Get the variable and its antecedent
+        size_t trail_index = current_level_indices[trail_index_pos];
         const auto &node = trail[trail_index];
         int var = std::abs(node.literal);
 
-        // Skip if this is a decision variable or has no antecedent
-        if (node.is_decision || node.antecedent_id == std::numeric_limits<size_t>::max())
+        // Skip if this variable is not in current_level_vars or is a decision
+        if (current_level_vars.find(var) == current_level_vars.end() || 
+            node.is_decision || 
+            node.antecedent_id == std::numeric_limits<size_t>::max())
         {
-            trail_index--;
+            trail_index_pos++;
             continue;
         }
 
+        // Get the antecedent clause
         const auto &antecedent = db->clauses[node.antecedent_id]->literals;
 
         if (debug_output)
@@ -949,14 +1035,13 @@ int CDCLSolverIncremental::analyzeConflict(ClauseID conflict_id, Clause &learned
         // Remove the current variable from the learned clause
         learned_clause.erase(
             std::remove_if(learned_clause.begin(), learned_clause.end(),
-                           [var](int lit)
-                           { return std::abs(lit) == var; }),
+                           [var](int lit) { return std::abs(lit) == var; }),
             learned_clause.end());
 
         // Add literals from the antecedent (except the current variable)
         for (int lit : antecedent)
         {
-            if (std::abs(lit) != var &&
+            if (std::abs(lit) != var && 
                 std::find(learned_clause.begin(), learned_clause.end(), lit) == learned_clause.end())
             {
                 learned_clause.push_back(lit);
@@ -969,9 +1054,10 @@ int CDCLSolverIncremental::analyzeConflict(ClauseID conflict_id, Clause &learned
                     const auto &lit_node = trail[it->second];
                     if (lit_node.decision_level == decision_level)
                     {
-                        if (std::find(current_level_vars.begin(), current_level_vars.end(), lit_var) == current_level_vars.end())
+                        if (current_level_vars.find(lit_var) == current_level_vars.end())
                         {
-                            current_level_vars.push_back(lit_var);
+                            current_level_vars.insert(lit_var);
+                            current_level_indices.push_back(it->second);
                         }
                     }
                     else if (lit_node.decision_level > backtrack_level &&
@@ -985,9 +1071,11 @@ int CDCLSolverIncremental::analyzeConflict(ClauseID conflict_id, Clause &learned
         }
 
         // Remove the variable from the current level set
-        current_level_vars.erase(
-            std::remove(current_level_vars.begin(), current_level_vars.end(), var),
-            current_level_vars.end());
+        current_level_vars.erase(var);
+
+        // Resort the indices after adding new variables
+        std::sort(current_level_indices.begin(), current_level_indices.end(), 
+                  [](size_t a, size_t b) { return a > b; });
 
         if (debug_output)
         {
@@ -996,13 +1084,40 @@ int CDCLSolverIncremental::analyzeConflict(ClauseID conflict_id, Clause &learned
             std::cout << "Current level variables remaining: " << current_level_vars.size() << "\n";
         }
 
-        // Move to the next variable in the trail
-        trail_index--;
+        // Move to the next position
+        trail_index_pos = 0;  // Restart with the sorted indices
     }
 
     // Remove duplicates from the learned clause
     std::sort(learned_clause.begin(), learned_clause.end());
     learned_clause.erase(std::unique(learned_clause.begin(), learned_clause.end()), learned_clause.end());
+
+    // Preserve all literals from assumptions
+    for (int assumption : assumptions)
+    {
+        int var = std::abs(assumption);
+        bool has_var = false;
+        for (int lit : learned_clause)
+        {
+            if (std::abs(lit) == var)
+            {
+                has_var = true;
+                break;
+            }
+        }
+        
+        // If the assumption variable is not in the learned clause,
+        // check if it was involved in the conflict path
+        if (!has_var)
+        {
+            auto it = var_to_trail.find(var);
+            if (it != var_to_trail.end() && decision_levels[var] == 0)
+            {
+                // Add this assumption to ensure it's captured for UNSAT core
+                learned_clause.push_back(assumption);
+            }
+        }
+    }
 
     if (debug_output)
     {
@@ -1402,11 +1517,26 @@ void CDCLSolverIncremental::minimizeClause(Clause &clause)
     // Try to remove each literal
     for (int lit : clause)
     {
-        // Don't remove literals of decision level 0
         int var = std::abs(lit);
+        
+        // Never remove literals at decision level 0
         auto it = var_to_trail.find(var);
         if (it != var_to_trail.end() && decision_levels[var] == 0)
         {
+            minimized.push_back(lit);
+            continue;
+        }
+        
+        // Never remove literals that correspond to assumptions
+        bool is_assumption = false;
+        for (int assumption : assumptions) {
+            if (lit == assumption) {  // Check exact literal match, not just variable
+                is_assumption = true;
+                break;
+            }
+        }
+        
+        if (is_assumption) {
             minimized.push_back(lit);
             continue;
         }
@@ -1427,6 +1557,9 @@ void CDCLSolverIncremental::minimizeClause(Clause &clause)
         }
         clause = minimized;
     }
+    
+    // Clear the seen set to prevent tracking issues between different calls
+    seen.clear();
 }
 
 // Check if a literal is redundant in the learned clause
@@ -1443,6 +1576,13 @@ bool CDCLSolverIncremental::isRedundant(int lit, std::unordered_set<int> &seen)
     if (node.is_decision || node.antecedent_id == std::numeric_limits<size_t>::max())
     {
         return false;
+    }
+
+    // Literals from assumptions should never be considered redundant
+    for (int assumption : assumptions) {
+        if (lit == assumption) { // Exact literal match to preserve polarity
+            return false;
+        }
     }
 
     // Check if the reason clause allows us to remove this literal
@@ -1472,6 +1612,14 @@ bool CDCLSolverIncremental::isRedundant(int lit, std::unordered_set<int> &seen)
             // this literal is not redundant
             if (reason_it == var_to_trail.end() ||
                 decision_levels[reason_var] > decision_levels[var])
+            {
+                return false;
+            }
+
+            // Check if this reason literal is derived from an assumption
+            // If it is, we should not consider the current literal redundant
+            const auto &reason_node = trail[reason_it->second];
+            if (reason_node.decision_level == 0)
             {
                 return false;
             }
@@ -1644,4 +1792,21 @@ bool CDCLSolverIncremental::checkTimeout()
         return true;
     }
     return false;
+}
+
+int CDCLSolverIncremental::newVariable() {
+    int new_var = db->getNumVariables();
+    
+    // Initialize activity for the new variable
+    activity[new_var] = 0.0;
+    
+    // Resize decision levels array if needed
+    if (new_var >= static_cast<int>(decision_levels.size())) {
+        decision_levels.resize(new_var + 1, 0);
+    }
+    
+    // Update the number of variables in the database
+    db->addVariable();
+    
+    return new_var;
 }

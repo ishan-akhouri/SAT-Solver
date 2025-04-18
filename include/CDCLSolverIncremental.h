@@ -67,6 +67,8 @@ private:
     bool use_phase_saving; // Use phase saving for decisions
     bool debug_output;
 
+    ClauseID conflict_clause_id; // ID of the last conflicting clause
+
     // Optional clause minimizer
     std::unique_ptr<ClauseMinimizer> minimizer;
 
@@ -117,6 +119,9 @@ public:
     int getNumVars() const;
     int getNumClauses() const;
     int getNumLearnts() const;
+
+    // New variable, used for incremental solving specifically graph coloring
+    int newVariable();
 
 private:
     // Internal solving methods

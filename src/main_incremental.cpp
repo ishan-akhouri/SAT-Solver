@@ -562,9 +562,17 @@ void runBenchmark(const std::string &name, const CNF &cnf, bool use_minimization
     std::cout << "Restarts:       " << solver.getRestarts() << std::endl;
 }
 
+
+struct pair_hash {
+    template <class T1, class T2>
+    std::size_t operator() (const std::pair<T1, T2> &pair) const {
+        return std::hash<T1>()(pair.first) ^ std::hash<T2>()(pair.second);
+    }
+};
+
+
 // Demonstrate incremental solving techniques
-void demonstrateIncrementalSolving()
-{
+void demonstrateIncrementalSolving() {
     std::cout << "===== Incremental Solving Demonstration =====\n\n";
 
     // Create a simple SAT problem (3-colorability of a small graph)
@@ -575,11 +583,9 @@ void demonstrateIncrementalSolving()
     const int NUM_COLORS = 3;
 
     // Each vertex must have at least one color
-    for (int v = 1; v <= NUM_VERTICES; v++)
-    {
+    for (int v = 1; v <= NUM_VERTICES; v++) {
         Clause at_least_one_color;
-        for (int c = 1; c <= NUM_COLORS; c++)
-        {
+        for (int c = 1; c <= NUM_COLORS; c++) {
             // Variable for "vertex v has color c"
             int var = (v - 1) * NUM_COLORS + c;
             at_least_one_color.push_back(var);
@@ -588,12 +594,9 @@ void demonstrateIncrementalSolving()
     }
 
     // Each vertex must have at most one color
-    for (int v = 1; v <= NUM_VERTICES; v++)
-    {
-        for (int c1 = 1; c1 <= NUM_COLORS; c1++)
-        {
-            for (int c2 = c1 + 1; c2 <= NUM_COLORS; c2++)
-            {
+    for (int v = 1; v <= NUM_VERTICES; v++) {
+        for (int c1 = 1; c1 <= NUM_COLORS; c1++) {
+            for (int c2 = c1 + 1; c2 <= NUM_COLORS; c2++) {
                 int var1 = (v - 1) * NUM_COLORS + c1;
                 int var2 = (v - 1) * NUM_COLORS + c2;
                 formula.push_back({-var1, -var2});
@@ -616,21 +619,17 @@ void demonstrateIncrementalSolving()
     std::cout << "Initial coloring problem is " << (result ? "SATISFIABLE" : "UNSATISFIABLE") << "\n";
     std::cout << "Time: " << std::fixed << std::setprecision(3) << elapsed.count() << " ms\n";
 
-    if (result)
-    {
+    if (result) {
         // Print the solution (coloring)
         std::cout << "Found coloring:\n";
         const auto &assignments = solver.getAssignments();
 
-        for (int v = 1; v <= NUM_VERTICES; v++)
-        {
+        for (int v = 1; v <= NUM_VERTICES; v++) {
             std::cout << "Vertex " << v << ": ";
-            for (int c = 1; c <= NUM_COLORS; c++)
-            {
+            for (int c = 1; c <= NUM_COLORS; c++) {
                 int var = (v - 1) * NUM_COLORS + c;
                 auto it = assignments.find(var);
-                if (it != assignments.end() && it->second)
-                {
+                if (it != assignments.end() && it->second) {
                     std::cout << "Color " << c << "\n";
                     break;
                 }
@@ -643,21 +642,21 @@ void demonstrateIncrementalSolving()
     std::vector<std::pair<int, int>> edges = {
         {1, 2}, {2, 3}, {3, 4}, {4, 5}, {5, 1}, {1, 3}};
 
-    for (size_t i = 0; i < edges.size(); i++)
-    {
+    for (size_t i = 0; i < edges.size(); i++) {
         int v1 = edges[i].first;
         int v2 = edges[i].second;
 
         std::cout << "Adding edge between vertices " << v1 << " and " << v2 << "...\n";
 
-        // Add constraints that adjacent vertices must have different colors
-        for (int c = 1; c <= NUM_COLORS; c++)
-        {
+        // For each color, add a constraint that adjacent vertices can't have the same color
+        for (int c = 1; c <= NUM_COLORS; c++) {
             int var1 = (v1 - 1) * NUM_COLORS + c;
             int var2 = (v2 - 1) * NUM_COLORS + c;
+            
+            // Add a permanent clause directly: if v1 has color c, v2 cannot have color c
             solver.addClause({-var1, -var2});
         }
-
+        
         // Check if the problem is still satisfiable
         start = std::chrono::high_resolution_clock::now();
         result = solver.solve();
@@ -668,85 +667,28 @@ void demonstrateIncrementalSolving()
         std::cout << "Time: " << std::fixed << std::setprecision(3) << elapsed.count() << " ms\n";
         std::cout << "Conflicts: " << solver.getConflicts() << "\n";
 
-        if (result)
-        {
+        if (result) {
             // Print the solution (coloring)
             std::cout << "Found coloring:\n";
             const auto &assignments = solver.getAssignments();
 
-            for (int v = 1; v <= NUM_VERTICES; v++)
-            {
+            for (int v = 1; v <= NUM_VERTICES; v++) {
                 std::cout << "Vertex " << v << ": ";
-                for (int c = 1; c <= NUM_COLORS; c++)
-                {
+                for (int c = 1; c <= NUM_COLORS; c++) {
                     int var = (v - 1) * NUM_COLORS + c;
                     auto it = assignments.find(var);
-                    if (it != assignments.end() && it->second)
-                    {
+                    if (it != assignments.end() && it->second) {
                         std::cout << "Color " << c << "\n";
                         break;
                     }
                 }
             }
-        }
-        else
-        {
-            // If unsatisfiable, print the core
-            std::vector<int> core = solver.getUnsatCore();
-            std::cout << "UNSAT core size: " << core.size() << " literals\n";
+        } else {
+            std::cout << "Graph is no longer 3-colorable after adding this edge.\n";
         }
 
         std::cout << "Current formula has " << solver.getNumClauses() << " clauses.\n";
         std::cout << "Learned clauses: " << solver.getNumLearnts() << "\n\n";
-    }
-
-    // Add more edges until the graph becomes uncolorable
-    if (result)
-    {
-        std::cout << "Making the graph more complex until it becomes uncolorable...\n";
-
-        // Additional edges to make the graph uncolorable (complete graph K4)
-        std::vector<std::pair<int, int>> more_edges = {
-            {1, 4}, {2, 4}, {2, 5}, {3, 5} // Adding these makes a K4 subgraph
-        };
-
-        for (const auto &[v1, v2] : more_edges)
-        {
-            std::cout << "Adding edge between vertices " << v1 << " and " << v2 << "...\n";
-
-            // Add constraints that adjacent vertices must have different colors
-            for (int c = 1; c <= NUM_COLORS; c++)
-            {
-                int var1 = (v1 - 1) * NUM_COLORS + c;
-                int var2 = (v2 - 1) * NUM_COLORS + c;
-                solver.addClause({-var1, -var2});
-            }
-
-            // Check if the problem is still satisfiable
-            start = std::chrono::high_resolution_clock::now();
-            result = solver.solve();
-            end = std::chrono::high_resolution_clock::now();
-            elapsed = end - start;
-
-            std::cout << "After adding edge, the problem is " << (result ? "SATISFIABLE" : "UNSATISFIABLE") << "\n";
-            std::cout << "Time: " << std::fixed << std::setprecision(3) << elapsed.count() << " ms\n";
-            std::cout << "Conflicts: " << solver.getConflicts() << "\n";
-
-            if (!result)
-            {
-                // Print the UNSAT core
-                std::vector<int> core = solver.getUnsatCore();
-                std::cout << "UNSAT core size: " << core.size() << " literals\n";
-
-                // The graph has become uncolorable
-                std::cout << "\nThe graph has become uncolorable with 3 colors!\n";
-                std::cout << "This is expected since we've created a K4 subgraph, which requires 4 colors.\n\n";
-                break;
-            }
-
-            std::cout << "Current formula has " << solver.getNumClauses() << " clauses.\n";
-            std::cout << "Learned clauses: " << solver.getNumLearnts() << "\n\n";
-        }
     }
 }
 

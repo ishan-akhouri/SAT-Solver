@@ -671,3 +671,14 @@ void ClauseDatabase::updateMemoryUsage()
         reduceLearnedClauses(dummy_assignments);
     }
 }
+
+int ClauseDatabase::addVariable() {
+    num_variables++;
+    
+    // Ensure the watches array is large enough
+    if (watches.size() <= 2 * num_variables) {
+        watches.resize(2 * num_variables + 1);
+    }
+
+    return num_variables;
+}
