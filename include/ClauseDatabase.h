@@ -71,6 +71,8 @@ private:
     size_t calculateMemoryUsage() const;
     void updateMemoryUsage();
 
+
+
 public:
     // Constructor
     ClauseDatabase(size_t num_vars, bool debug = false);
@@ -112,6 +114,8 @@ public:
     void printStatistics() const;
     void printWatches() const;
     bool checkWatchesConsistency() const;
+
+    
 
     // Clear all learned clauses and reset the database
     void clearLearnedClauses()

@@ -173,7 +173,7 @@ void PortfolioManager::solverThread(int solver_id, const CNF& formula) {
         setpriority(PRIO_PROCESS, 0, -10);  // High priority
 
         // Create solver instance
-        CDCLSolverIncremental solver(formula);
+        CDCLSolverIncremental solver(formula, false, this);
         
         // Apply configuration
         configureSolver(solver, solver_id);
@@ -204,18 +204,29 @@ void PortfolioManager::solverThread(int solver_id, const CNF& formula) {
                 best_solution = solver.getAssignments();
                 winning_solver_id = solver_id;
                 solver_statistics[solver_id].termination_reason = 0;  // Solution found
+                
+                // Signal all solvers to terminate
+                terminateAllSolvers();
             }
         }
         
-        // Decrement active solvers count
-        active_solvers--;
-        
         // Record statistics with the actual solver time
         recordStatistics(solver_id, solver, solve_time);
+
+        // Decrement active solvers count using atomic directly
+        active_solvers.fetch_sub(1);
+
+        // Notify others of available resources
+        resource_cv.notify_all();
         
     } catch (const std::exception& e) {
         std::cerr << "Solver " << solver_id << " failed: " << e.what() << std::endl;
-        active_solvers--;
+        
+        // Decrement active solvers using atomic directly
+        active_solvers.fetch_sub(1);
+        // Notify others of available resources
+        resource_cv.notify_all();
+
         std::lock_guard<std::mutex> lock(result_mutex);
         solver_statistics[solver_id].termination_reason = 2;  // Resource limit
     }
@@ -247,7 +258,9 @@ void PortfolioManager::monitorThread() {
             initialization_complete = true;
         }
         
-        // Removed sleep to reduce latency
+        // Reduce CPU usage
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));  
+
     }
 }
 
@@ -279,16 +292,16 @@ bool PortfolioManager::checkResourceAvailability() {
         return false;
     }
     
-    active_solvers++;
+    active_solvers.fetch_add(1);
     total_memory_used += estimateMemoryUsage(formula);
     return true;
 }
 
 void PortfolioManager::releaseResources() {
     std::lock_guard<std::mutex> lock(resource_mutex);
-    active_solvers--;
+    active_solvers.fetch_sub(1);
     total_memory_used -= estimateMemoryUsage(formula);
-    resource_cv.notify_one();
+    resource_cv.notify_all();
 }
 
 // Termination control

@@ -24,6 +24,9 @@ struct ImplicationNodeIncremental
 // Forward declare the ClauseMinimizer class to avoid circular dependencies
 class ClauseMinimizer;
 
+// Forward declaration
+class PortfolioManager;
+
 // Class for incremental CDCL solving with clause database management
 class CDCLSolverIncremental
 {
@@ -78,12 +81,15 @@ private:
 
     int stuck_counter; // Counter for detecting when solver is stuck
 
+    // Pointer to portfolio manager
+    PortfolioManager *portfolio_manager;
+
 public:
     // Make ClauseMinimizer a friend to access private members
     friend class ClauseMinimizer;
 
     // Constructor from a CNF formula
-    CDCLSolverIncremental(const CNF &formula, bool debug = false);
+    CDCLSolverIncremental(const CNF &formula, bool debug = false, PortfolioManager *portfolio = nullptr);
 
     // Destructor
     ~CDCLSolverIncremental();
@@ -123,6 +129,9 @@ public:
     // New variable, used for incremental solving specifically graph coloring
     int newVariable();
 
+    // Timeout related methods
+    bool checkTimeout();
+
 private:
     // Internal solving methods
     bool unitPropagate();                                              // Propagate unit clauses
@@ -139,7 +148,9 @@ private:
 
     // Clause database helpers
     void minimizeClause(Clause &clause); // Minimize learned clause
-    bool isRedundant(int lit, std::unordered_set<int> &seen);
+    bool isRedundant(int lit, std::unordered_set<int> &seen, int &timeout_check_counter,
+        const std::chrono::time_point<std::chrono::high_resolution_clock>& start_time,
+        const std::chrono::milliseconds& max_time);
 
     // Restart strategy
     bool shouldRestart();    // Check if we should restart
@@ -151,8 +162,7 @@ private:
     void printClause(const Clause &clause) const; // Print a clause
     void printStatistics() const;                 // Print solver statistics
 
-    // Timeout related methods
-    bool checkTimeout();
+   
 };
 
 #endif

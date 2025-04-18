@@ -110,6 +110,8 @@ public:
     // Get solver statistics
     const std::vector<SolverStats> &getSolverStatistics() const { return solver_statistics; }
 
+    bool isSolutionFound() const { return solution_found; }
+
 private:
     // Initialize diverse solver configurations
     void initializeConfigs();
