@@ -149,8 +149,8 @@ private:
     // Clause database helpers
     void minimizeClause(Clause &clause); // Minimize learned clause
     bool isRedundant(int lit, std::unordered_set<int> &seen, int &timeout_check_counter,
-        const std::chrono::time_point<std::chrono::high_resolution_clock>& start_time,
-        const std::chrono::milliseconds& max_time);
+                     const std::chrono::time_point<std::chrono::high_resolution_clock> &start_time,
+                     const std::chrono::milliseconds &max_time);
 
     // Restart strategy
     bool shouldRestart();    // Check if we should restart
@@ -161,8 +161,6 @@ private:
     void printTrail() const;                      // Print current trail
     void printClause(const Clause &clause) const; // Print a clause
     void printStatistics() const;                 // Print solver statistics
-
-   
 };
 
 #endif

@@ -59,4 +59,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/sat_solver.dir/DependInfo.cmake"
   "CMakeFiles/sat_solver_incremental.dir/DependInfo.cmake"
   "CMakeFiles/sat_solver_portfolio.dir/DependInfo.cmake"
+  "CMakeFiles/sat_solver_preprocessor.dir/DependInfo.cmake"
   )

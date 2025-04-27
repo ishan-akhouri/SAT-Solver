@@ -11,6 +11,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/sat_solver.dir/src/DPLL.cpp.o.d"
   "CMakeFiles/sat_solver.dir/src/PortfolioManager.cpp.o"
   "CMakeFiles/sat_solver.dir/src/PortfolioManager.cpp.o.d"
+  "CMakeFiles/sat_solver.dir/src/Preprocessor.cpp.o"
+  "CMakeFiles/sat_solver.dir/src/Preprocessor.cpp.o.d"
   "CMakeFiles/sat_solver.dir/src/main.cpp.o"
   "CMakeFiles/sat_solver.dir/src/main.cpp.o.d"
   "sat_solver"

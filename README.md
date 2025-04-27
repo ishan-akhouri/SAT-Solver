@@ -1,15 +1,16 @@
-# Advanced SAT Solver with DPLL, CDCL, Incremental Solving, and Portfolio Parallelism
+# Advanced SAT Solver with DPLL, CDCL, Incremental Solving, Preprocessing and Portfolio Parallelism
 
-A C++ implementation of modern SAT solving algorithms for Boolean satisfiability problems, featuring DPLL with VSIDS, a full CDCL implementation with non-chronological backtracking, a state-of-the-art incremental SAT solver with sophisticated clause database management, and a parallel portfolio-based approach for handling challenging instances.
+A C++ implementation of modern SAT solving algorithms for Boolean satisfiability problems, featuring DPLL with VSIDS, a full CDCL implementation with non-chronological backtracking, a state-of-the-art incremental SAT solver with sophisticated clause database management, advanced preprocessing techniques, and a parallel portfolio-based approach for handling challenging instances.
 
 ## Overview
 
-This SAT solver efficiently determines whether a given Boolean formula in conjunctive normal form (CNF) is satisfiable. The implementation includes four major solving approaches:
+This SAT solver efficiently determines whether a given Boolean formula in conjunctive normal form (CNF) is satisfiable. The implementation includes five major solving approaches:
 
 1. **DPLL Algorithm with VSIDS**: The classic Davis–Putnam–Logemann–Loveland algorithm enhanced with Variable State Independent Decaying Sum heuristic
 2. **CDCL with Non-Chronological Backtracking**: A modern Conflict-Driven Clause Learning implementation that significantly outperforms DPLL on complex problems
 3. **Incremental CDCL Solver**: A sophisticated incremental solver with reference-counted clause database management, optimized for solving sequences of related formulas efficiently
-4. **Portfolio-based Parallel Solver**: A multi-configuration parallel approach that runs diverse solver instances simultaneously to tackle hard problems efficiently
+4. **Advanced Preprocessing Suite**: Problem-specific preprocessing techniques that significantly reduce formula size before solving
+5. **Portfolio-based Parallel Solver**: A multi-configuration parallel approach that runs diverse solver instances simultaneously to tackle hard problems efficiently
 
 ## Features
 
@@ -39,6 +40,35 @@ This SAT solver efficiently determines whether a given Boolean formula in conjun
   - Activity-based scoring
   - Literal Block Distance (LBD) metrics
   - Smart clause deletion policies
+
+### Advanced Preprocessing Suite
+- **Problem Structure Detection**:
+  - Automatic identification of common problem types (N-Queens, Pigeonhole, Graph Coloring, Hamiltonian)
+  - Specialized preprocessing for detected problem structures
+  - Configuration adaptation based on problem characteristics
+- **Formula Simplification Techniques**:
+  - **Unit Propagation**: Efficiently handles unit clauses
+  - **Pure Literal Elimination**: Removes literals appearing with only one polarity
+  - **Subsumption**: Removes clauses that are subsumed by others
+  - **Self-Subsumption**: Strengthens clauses by removing redundant literals
+  - **Variable Elimination**: Domain-Aware Resolution-based Variable Elimination (DARVE)
+  - **Failed Literal Detection**: Identifies literals that lead to contradictions
+  - **Blocked Clause Elimination**: Removes clauses blocked with respect to certain variables
+- **Multi-Phase Preprocessing**:
+  - Initial basic preprocessing phase
+  - Structure-preserving phase for specialized problem types
+  - Aggressive simplification phase for generic problems
+  - Final clean-up phase
+- **Redundancy Handling**:
+  - Detection and elimination of duplicate clauses
+  - Identification and removal of subsumed clauses
+  - Elimination of tautological clauses
+  - Resolution of transitive relationships
+- **Statistical Tracking**:
+  - Detailed metrics on preprocessing effectiveness
+  - Performance improvements from different techniques
+  - Formula size reduction measurements
+  - Tracked variables and clauses for solution mapping
 
 ### Portfolio-based Parallel Solver
 - **Diversified solver configurations** running in parallel:
@@ -79,6 +109,7 @@ This SAT solver efficiently determines whether a given Boolean formula in conjun
 │   ├── CDCLSolverIncremental.h   # Incremental CDCL solver header
 │   ├── ClauseDatabase.h          # Reference-counted clause database
 │   ├── ClauseMinimizer.h         # Clause minimization techniques
+│   ├── Preprocessor.h            # Formula preprocessing techniques
 │   └── PortfolioManager.h        # Portfolio-based parallel solver
 ├── src/
 │   ├── DPLL.cpp                  # DPLL algorithm implementation
@@ -86,9 +117,11 @@ This SAT solver efficiently determines whether a given Boolean formula in conjun
 │   ├── CDCLSolverIncremental.cpp # Incremental CDCL solver implementation
 │   ├── ClauseDatabase.cpp        # Clause database implementation
 │   ├── ClauseMinimizer.cpp       # Clause minimization techniques
+│   ├── Preprocessor.cpp          # Preprocessing implementation
 │   ├── PortfolioManager.cpp      # Portfolio-based parallel solver implementation
 │   ├── main.cpp                  # Main test harness for standard SAT solving
 │   ├── main_incremental.cpp      # Main test harness for incremental SAT solving
+│   ├── main_preprocessor.cpp     # Main test harness for preprocessing
 │   ├── main_portfolio.cpp        # Main test harness for portfolio solver
 │   └── IncrementalQueensSolver.cpp # Example application (N-Queens)
 └── README.md
@@ -120,6 +153,42 @@ CDCL is a modern SAT solving algorithm that dramatically improves upon DPLL by:
 4. **Restart strategy**: Periodically restarting the search while keeping learned clauses helps escape from getting stuck in unproductive areas of the search space
 
 The CDCL implementation tracks an implication graph with decision and propagation trails to perform conflict analysis. This approach significantly reduces the search space for complex problems.
+
+### Preprocessor Suite
+
+The preprocessor suite improves solver efficiency by simplifying formulas before the main solving phase:
+
+1. **Problem Structure Detection**:
+   - Analyzes formula structure to identify common problem types
+   - N-Queens problems: Detects row/column/diagonal constraints 
+   - Pigeonhole problems: Identifies pigeon/hole assignments and conflicts
+   - Graph coloring: Recognizes vertex/color constraints
+   - Hamiltonian paths/cycles: Detects position/vertex encodings
+
+2. **Multi-Phase Approach**:
+   - **Initial Phase**: Performs basic simplifications like unit propagation
+   - **Structural Phase**: Applies structure-preserving techniques based on problem type
+   - **Aggressive Phase**: Uses more complex techniques for generic problems
+   - **Final Phase**: Ensures the formula is in optimal form for solving
+
+3. **Core Techniques**:
+   - **Unit Propagation**: Assigns values to variables in unit clauses
+   - **Pure Literal Elimination**: Removes literals appearing with only one polarity
+   - **Subsumption**: Removes clauses that are subsumed by others
+   - **Variable Elimination**: Uses resolution to eliminate variables
+   - **Failed Literal Detection**: Identifies literals that lead to contradictions
+
+4. **Redundancy Handling**:
+   - Detects and removes duplicate clauses
+   - Eliminates tautological clauses (always satisfied)
+   - Identifies transitive relationships and simplifies
+   - Helps remove up to 30% of clauses in some instances
+
+5. **Adaptive Processing**:
+   - Applies different techniques based on detected problem type
+   - Preserves problem structure for specialized solvers
+   - More aggressive for general problems
+   - Performance profiling to focus on effective techniques
 
 ### Incremental CDCL with Clause Database Management
 
@@ -232,6 +301,24 @@ Run the program:
 ./sat_solver_incremental debug                 # Run basic debugging tests
 ```
 
+### Preprocessor Test Harness
+
+Compile the preprocessor test harness:
+
+```bash
+g++ -std=c++17 -o sat_preprocessor src/main_preprocessor.cpp src/Preprocessor.cpp src/CDCL.cpp src/CDCLSolverIncremental.cpp src/ClauseDatabase.cpp -Iinclude
+```
+
+Run the program:
+
+```bash
+./sat_preprocessor                      # Run all tests
+./sat_preprocessor nqueens 8            # Test N-Queens preprocessing (8x8 board)
+./sat_preprocessor pigeonhole           # Test Pigeonhole preprocessing
+./sat_preprocessor hamiltonian          # Test Hamiltonian preprocessing
+./sat_preprocessor noredundancy         # Run tests without redundancy
+```
+
 ### Portfolio-based Parallel Solver
 
 Compile the portfolio solver:
@@ -271,6 +358,43 @@ bool result = solver.solve();
 if (result) {
     const auto& assignments = solver.getAssignments();
 }
+```
+
+#### Using the Preprocessor:
+
+```cpp
+#include "Preprocessor.h"
+#include "CDCLSolverIncremental.h"
+
+// Create a formula in CNF
+CNF formula = {{1, 2}, {-1, 3}, {-2, -3}};
+
+// Set up preprocessor configuration
+PreprocessorConfig config;
+config.use_unit_propagation = true;
+config.use_pure_literal_elimination = true;
+config.use_subsumption = true;
+config.use_failed_literal = true;
+config.use_variable_elimination = true;
+
+// Create and run preprocessor
+Preprocessor preprocessor(config);
+CNF simplified_formula = preprocessor.preprocess(formula);
+
+// Create solver with preprocessed formula
+CDCLSolverIncremental solver(simplified_formula);
+
+// Solve
+bool result = solver.solve();
+
+// Get assignments and map back to original variables if needed
+if (result) {
+    auto simplified_solution = solver.getAssignments();
+    auto original_solution = preprocessor.mapSolutionToOriginal(simplified_solution);
+}
+
+// Print preprocessing statistics
+preprocessor.printStats();
 ```
 
 #### Incremental Solving:
@@ -352,6 +476,8 @@ The program includes several test cases:
 9. **Phase Transition Benchmark**: Tests portfolio performance across the SAT phase transition region
 10. **Scaling Benchmark**: Evaluates portfolio performance with increasing problem sizes
 11. **Configuration Effectiveness**: Analyzes which solver configurations perform best for different problem types
+12. **Preprocessing Effectiveness**: Tests impact of preprocessing across different problem types
+13. **Redundancy Handling**: Evaluates preprocessor on formulas with added redundant clauses
 
 The random 3-SAT tests include instances around the phase transition (clause-to-variable ratio of approximately 4.25), where problems are typically hardest to solve.
 
@@ -372,6 +498,14 @@ For CDCL:
 - Number of learned clauses
 - Maximum decision level reached
 - Number of restarts
+
+For Preprocessor:
+- Original vs. simplified variables count
+- Original vs. simplified clauses count
+- Variable and clause reduction percentages
+- Time spent in each preprocessing phase
+- Performance of individual techniques
+- Problem type detection accuracy
 
 For Incremental CDCL:
 - All CDCL metrics plus:
@@ -399,6 +533,14 @@ The different solver implementations are suited for various applications:
 - Software testing
 - Cryptanalysis
 
+### Preprocessor
+- **Hardware Verification**: Simplifying large circuit representations
+- **Formal Methods**: Preprocessing verification conditions
+- **Symmetry Breaking**: Detecting and handling symmetries in problems
+- **AI Planning**: Simplifying planning domain encodings
+- **Constraint Programming**: Preprocessing constraint satisfaction problems
+- **Automated Reasoning**: Simplifying theorem proving tasks
+
 ### Incremental Solver
 - **Bounded Model Checking**: Verify increasingly longer execution paths
 - **Planning Problems**: Add constraints incrementally as the plan unfolds
@@ -420,11 +562,13 @@ The different solver implementations are suited for various applications:
 Future enhancements planned for this solver include:
 - **Advanced Portfolio Strategies**: Implement clause sharing between solvers and adaptive configuration selection
 - **Distributed Computing Support**: Enable solving across multiple machines
-- **Advanced Preprocessing Techniques**: Variable and clause elimination, subsumption, etc.
+- **Advanced Preprocessing Techniques**: Additional variable and clause elimination, subsumption techniques
 - **MaxSAT Extensions**: Core-guided MaxSAT algorithms and optimization capabilities
 - **QBF Solving**: Quantified Boolean Formula solving for PSPACE-hard problems
 - **Comprehensive Benchmarking and Analysis**: Performance against SAT competition benchmarks
 - **Machine Learning Integration**: Predict optimal solver configurations for given problem characteristics
+- **Enhanced Problem Detection**: More sophisticated structure detection algorithms
+- **Interactive Preprocessing Visualization**: Tools to understand formula simplification steps
 
 ## License
 

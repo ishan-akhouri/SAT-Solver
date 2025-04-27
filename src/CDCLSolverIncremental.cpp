@@ -10,7 +10,7 @@
 #include <random>
 
 // Constructor from a CNF formula
-CDCLSolverIncremental::CDCLSolverIncremental(const CNF &formula, bool debug, PortfolioManager* portfolio_manager)
+CDCLSolverIncremental::CDCLSolverIncremental(const CNF &formula, bool debug, PortfolioManager *portfolio_manager)
     : decision_level(0),
       var_inc(1.0),
       var_decay(0.95),
@@ -113,7 +113,8 @@ bool CDCLSolverIncremental::solve(const std::vector<int> &assume)
     trail.clear();
     var_to_trail.clear();
     assignments.clear();
-    for (size_t i = 0; i < decision_levels.size(); i++) {
+    for (size_t i = 0; i < decision_levels.size(); i++)
+    {
         decision_levels[i] = 0;
     }
     decision_level = 0;
@@ -188,19 +189,22 @@ bool CDCLSolverIncremental::solve(const std::vector<int> &assume)
         for (int assumption : assumptions)
         {
             int var = std::abs(assumption);
-            
+
             // Check if this variable appears in the learned clause with correct polarity
             bool var_in_learned_clause = false;
-            for (int learned_lit : learned_clause) {
+            for (int learned_lit : learned_clause)
+            {
                 // Check for exact literal match to respect polarity
-                if (learned_lit == -assumption) {
+                if (learned_lit == -assumption)
+                {
                     var_in_learned_clause = true;
                     break;
                 }
             }
-            
-            if (!var_in_learned_clause) {
-                continue;  // Skip this assumption if not in learned clause
+
+            if (!var_in_learned_clause)
+            {
+                continue; // Skip this assumption if not in learned clause
             }
 
             // Now check if it was assigned as an assumption at level 0
@@ -413,19 +417,22 @@ bool CDCLSolverIncremental::solve(const std::vector<int> &assume)
                 for (int assumption : assumptions)
                 {
                     int var = std::abs(assumption);
-                    
+
                     // Check if this variable appears in the learned clause with correct polarity
                     bool var_in_learned_clause = false;
-                    for (int learned_lit : learned_clause) {
+                    for (int learned_lit : learned_clause)
+                    {
                         // Check for exact literal match to respect polarity
-                        if (learned_lit == -assumption) {
+                        if (learned_lit == -assumption)
+                        {
                             var_in_learned_clause = true;
                             break;
                         }
                     }
-                    
-                    if (!var_in_learned_clause) {
-                        continue;  // Skip this assumption if not in learned clause
+
+                    if (!var_in_learned_clause)
+                    {
+                        continue; // Skip this assumption if not in learned clause
                     }
 
                     // Now check if it was assigned as an assumption at level 0
@@ -503,8 +510,6 @@ bool CDCLSolverIncremental::solve(const std::vector<int> &assume)
     // Return UNSAT as a conservative approach
     return false;
 }
-
-
 
 // Add a permanent clause to the formula
 void CDCLSolverIncremental::addClause(const Clause &clause)
@@ -1003,13 +1008,14 @@ int CDCLSolverIncremental::analyzeConflict(ClauseID conflict_id, Clause &learned
     }
 
     // Sort indices in reverse order for deterministic processing
-    std::sort(current_level_indices.begin(), current_level_indices.end(), 
-              [](size_t a, size_t b) { return a > b; });
+    std::sort(current_level_indices.begin(), current_level_indices.end(),
+              [](size_t a, size_t b)
+              { return a > b; });
 
     // Resolve the conflict by combining with antecedent clauses
     size_t trail_index_pos = 0;
     while (current_level_vars.size() > 1 && trail_index_pos < current_level_indices.size())
-    { 
+    {
         if (trail_index_pos % 100 == 0)
         {
             if (checkTimeout())
@@ -1024,8 +1030,8 @@ int CDCLSolverIncremental::analyzeConflict(ClauseID conflict_id, Clause &learned
         int var = std::abs(node.literal);
 
         // Skip if this variable is not in current_level_vars or is a decision
-        if (current_level_vars.find(var) == current_level_vars.end() || 
-            node.is_decision || 
+        if (current_level_vars.find(var) == current_level_vars.end() ||
+            node.is_decision ||
             node.antecedent_id == std::numeric_limits<size_t>::max())
         {
             trail_index_pos++;
@@ -1046,13 +1052,14 @@ int CDCLSolverIncremental::analyzeConflict(ClauseID conflict_id, Clause &learned
         // Remove the current variable from the learned clause
         learned_clause.erase(
             std::remove_if(learned_clause.begin(), learned_clause.end(),
-                           [var](int lit) { return std::abs(lit) == var; }),
+                           [var](int lit)
+                           { return std::abs(lit) == var; }),
             learned_clause.end());
 
         // Add literals from the antecedent (except the current variable)
         for (int lit : antecedent)
         {
-            if (std::abs(lit) != var && 
+            if (std::abs(lit) != var &&
                 std::find(learned_clause.begin(), learned_clause.end(), lit) == learned_clause.end())
             {
                 learned_clause.push_back(lit);
@@ -1085,8 +1092,9 @@ int CDCLSolverIncremental::analyzeConflict(ClauseID conflict_id, Clause &learned
         current_level_vars.erase(var);
 
         // Resort the indices after adding new variables
-        std::sort(current_level_indices.begin(), current_level_indices.end(), 
-                  [](size_t a, size_t b) { return a > b; });
+        std::sort(current_level_indices.begin(), current_level_indices.end(),
+                  [](size_t a, size_t b)
+                  { return a > b; });
 
         if (debug_output)
         {
@@ -1096,7 +1104,7 @@ int CDCLSolverIncremental::analyzeConflict(ClauseID conflict_id, Clause &learned
         }
 
         // Move to the next position
-        trail_index_pos = 0;  // Restart with the sorted indices
+        trail_index_pos = 0; // Restart with the sorted indices
     }
 
     // Remove duplicates from the learned clause
@@ -1116,7 +1124,7 @@ int CDCLSolverIncremental::analyzeConflict(ClauseID conflict_id, Clause &learned
                 break;
             }
         }
-        
+
         // If the assumption variable is not in the learned clause,
         // check if it was involved in the conflict path
         if (!has_var)
@@ -1514,7 +1522,8 @@ void CDCLSolverIncremental::decayVarActivities()
 void CDCLSolverIncremental::minimizeClause(Clause &clause)
 {
     // Skip minimization for very large clauses
-    if (clause.size() > 100) {
+    if (clause.size() > 100)
+    {
         return;
     }
 
@@ -1523,8 +1532,9 @@ void CDCLSolverIncremental::minimizeClause(Clause &clause)
     const auto max_minimize_time = std::chrono::milliseconds(100); // 100ms max
 
     // Add timeout check at the start
-    if (checkTimeout()) {
-        return;  // Skip minimization if timeout or solution found
+    if (checkTimeout())
+    {
+        return; // Skip minimization if timeout or solution found
     }
 
     if (clause.size() <= 1)
@@ -1532,7 +1542,7 @@ void CDCLSolverIncremental::minimizeClause(Clause &clause)
 
     std::unordered_set<int> seen;
     std::vector<int> minimized;
-    
+
     // Counter for periodic timeout checks
     int timeout_check_counter = 0;
 
@@ -1546,19 +1556,21 @@ void CDCLSolverIncremental::minimizeClause(Clause &clause)
     for (int lit : clause)
     {
         // Check timeout periodically
-        if ((timeout_check_counter++ % 50) == 0) {
+        if ((timeout_check_counter++ % 50) == 0)
+        {
             // Check local timeout
             auto current_time = std::chrono::high_resolution_clock::now();
             auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
                 current_time - minimize_start);
-            if (elapsed > max_minimize_time || checkTimeout()) {
+            if (elapsed > max_minimize_time || checkTimeout())
+            {
                 // If timeout detected, just return the original clause
                 return;
             }
         }
-        
+
         int var = std::abs(lit);
-        
+
         // Never remove literals at decision level 0
         auto it = var_to_trail.find(var);
         if (it != var_to_trail.end() && decision_levels[var] == 0)
@@ -1566,17 +1578,20 @@ void CDCLSolverIncremental::minimizeClause(Clause &clause)
             minimized.push_back(lit);
             continue;
         }
-        
+
         // Never remove literals that correspond to assumptions
         bool is_assumption = false;
-        for (int assumption : assumptions) {
-            if (lit == assumption) {  // Check exact literal match, not just variable
+        for (int assumption : assumptions)
+        {
+            if (lit == assumption)
+            { // Check exact literal match, not just variable
                 is_assumption = true;
                 break;
             }
         }
-        
-        if (is_assumption) {
+
+        if (is_assumption)
+        {
             minimized.push_back(lit);
             continue;
         }
@@ -1597,104 +1612,109 @@ void CDCLSolverIncremental::minimizeClause(Clause &clause)
         }
         clause = minimized;
     }
-    
+
     // Clear the seen set to prevent tracking issues between different calls
     seen.clear();
 }
 
 // Check if a literal is redundant in the learned clause
 // Modified isRedundant to include timeout checks
-bool CDCLSolverIncremental::isRedundant(int lit, std::unordered_set<int> &seen, int &timeout_check_counter, 
-    const std::chrono::time_point<std::chrono::high_resolution_clock>& start_time,
-    const std::chrono::milliseconds& max_time)
+bool CDCLSolverIncremental::isRedundant(int lit, std::unordered_set<int> &seen, int &timeout_check_counter,
+                                        const std::chrono::time_point<std::chrono::high_resolution_clock> &start_time,
+                                        const std::chrono::milliseconds &max_time)
 {
-// Check timeout periodically
-if ((timeout_check_counter++ % 50) == 0) {
-// Check local timeout
-auto current_time = std::chrono::high_resolution_clock::now();
-auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
-current_time - start_time);
-if (elapsed > max_time || checkTimeout()) {
-return false;  // Conservative approach: if timeout, don't consider redundant
+    // Check timeout periodically
+    if ((timeout_check_counter++ % 50) == 0)
+    {
+        // Check local timeout
+        auto current_time = std::chrono::high_resolution_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
+            current_time - start_time);
+        if (elapsed > max_time || checkTimeout())
+        {
+            return false; // Conservative approach: if timeout, don't consider redundant
+        }
+    }
+
+    int var = std::abs(lit);
+    auto it = var_to_trail.find(var);
+    if (it == var_to_trail.end())
+        return false;
+
+    const auto &node = trail[it->second];
+
+    // Decision variables or assumptions are never redundant
+    if (node.is_decision || node.antecedent_id == std::numeric_limits<size_t>::max())
+    {
+        return false;
+    }
+
+    // Literals from assumptions should never be considered redundant
+    for (int assumption : assumptions)
+    {
+        if (lit == assumption)
+        { // Exact literal match to preserve polarity
+            return false;
+        }
+    }
+
+    // Check if the reason clause allows us to remove this literal
+    if (node.antecedent_id >= db->clauses.size() || !db->clauses[node.antecedent_id])
+    {
+        return false; // The antecedent clause has been deleted
+    }
+
+    const auto &reason = db->clauses[node.antecedent_id]->literals;
+
+    // Check each literal in the reason clause
+    for (int reason_lit : reason)
+    {
+        // Periodic timeout check
+        if ((timeout_check_counter++ % 50) == 0)
+        {
+            // Check local timeout
+            auto current_time = std::chrono::high_resolution_clock::now();
+            auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
+                current_time - start_time);
+            if (elapsed > max_time || checkTimeout())
+            {
+                return false; // Conservative approach
+            }
+        }
+
+        if (std::abs(reason_lit) == var)
+            continue; // Skip the literal itself
+
+        // Calculate the negated reason literal (for seen check)
+        int neg_reason_lit = -reason_lit;
+
+        // If the negation is not in seen, this literal is not redundant
+        if (seen.find(neg_reason_lit) == seen.end())
+        {
+            int reason_var = std::abs(reason_lit);
+            auto reason_it = var_to_trail.find(reason_var);
+
+            // If the reason variable is not in the trail or is from a deeper level,
+            // this literal is not redundant
+            if (reason_it == var_to_trail.end() ||
+                decision_levels[reason_var] > decision_levels[var])
+            {
+                return false;
+            }
+
+            // Check if this reason literal is derived from an assumption
+            // If it is, we should not consider the current literal redundant
+            const auto &reason_node = trail[reason_it->second];
+            if (reason_node.decision_level == 0)
+            {
+                return false;
+            }
+        }
+    }
+
+    // If we got here, the literal is redundant
+    return true;
 }
-}
-
-int var = std::abs(lit);
-auto it = var_to_trail.find(var);
-if (it == var_to_trail.end())
-return false;
-
-const auto &node = trail[it->second];
-
-// Decision variables or assumptions are never redundant
-if (node.is_decision || node.antecedent_id == std::numeric_limits<size_t>::max())
-{
-return false;
-}
-
-// Literals from assumptions should never be considered redundant
-for (int assumption : assumptions) {
-if (lit == assumption) { // Exact literal match to preserve polarity
-return false;
-}
-}
-
-// Check if the reason clause allows us to remove this literal
-if (node.antecedent_id >= db->clauses.size() || !db->clauses[node.antecedent_id])
-{
-return false; // The antecedent clause has been deleted
-}
-
-const auto &reason = db->clauses[node.antecedent_id]->literals;
-
-// Check each literal in the reason clause
-for (int reason_lit : reason)
-{
-// Periodic timeout check
-if ((timeout_check_counter++ % 50) == 0) {
-// Check local timeout
-auto current_time = std::chrono::high_resolution_clock::now();
-auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
-current_time - start_time);
-if (elapsed > max_time || checkTimeout()) {
-return false;  // Conservative approach
-}
-}
-
-if (std::abs(reason_lit) == var)
-continue; // Skip the literal itself
-
-// Calculate the negated reason literal (for seen check)
-int neg_reason_lit = -reason_lit;
-
-// If the negation is not in seen, this literal is not redundant
-if (seen.find(neg_reason_lit) == seen.end())
-{
-int reason_var = std::abs(reason_lit);
-auto reason_it = var_to_trail.find(reason_var);
-
-// If the reason variable is not in the trail or is from a deeper level,
-// this literal is not redundant
-if (reason_it == var_to_trail.end() ||
-decision_levels[reason_var] > decision_levels[var])
-{
-return false;
-}
-
-// Check if this reason literal is derived from an assumption
-// If it is, we should not consider the current literal redundant
-const auto &reason_node = trail[reason_it->second];
-if (reason_node.decision_level == 0)
-{
-return false;
-}
-}
-}
-
-// If we got here, the literal is redundant
-return true;
-}
-
 
 // Check if we should restart
 bool CDCLSolverIncremental::shouldRestart()
@@ -1849,9 +1869,9 @@ bool CDCLSolverIncremental::checkTimeout()
     auto current_time = std::chrono::high_resolution_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
         current_time - start_time);
-    
+
     // Check both timeout and solution found status from portfolio
-    if (elapsed > timeout_duration || 
+    if (elapsed > timeout_duration ||
         (portfolio_manager != nullptr && portfolio_manager->isSolutionFound()))
     {
         if (debug_output)
@@ -1863,19 +1883,21 @@ bool CDCLSolverIncremental::checkTimeout()
     return false;
 }
 
-int CDCLSolverIncremental::newVariable() {
+int CDCLSolverIncremental::newVariable()
+{
     int new_var = db->getNumVariables();
-    
+
     // Initialize activity for the new variable
     activity[new_var] = 0.0;
-    
+
     // Resize decision levels array if needed
-    if (new_var >= static_cast<int>(decision_levels.size())) {
+    if (new_var >= static_cast<int>(decision_levels.size()))
+    {
         decision_levels.resize(new_var + 1, 0);
     }
-    
+
     // Update the number of variables in the database
     db->addVariable();
-    
+
     return new_var;
 }

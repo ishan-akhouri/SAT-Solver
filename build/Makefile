@@ -155,6 +155,19 @@ sat_solver_portfolio/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/build
 .PHONY : sat_solver_portfolio/fast
 
+#=============================================================================
+# Target rules for targets named sat_solver_preprocessor
+
+# Build rule for target.
+sat_solver_preprocessor: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sat_solver_preprocessor
+.PHONY : sat_solver_preprocessor
+
+# fast build rule for target.
+sat_solver_preprocessor/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/build
+.PHONY : sat_solver_preprocessor/fast
+
 src/CDCL.o: src/CDCL.cpp.o
 .PHONY : src/CDCL.o
 
@@ -163,6 +176,7 @@ src/CDCL.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/CDCL.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/CDCL.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/CDCL.cpp.o
 .PHONY : src/CDCL.cpp.o
 
 src/CDCL.i: src/CDCL.cpp.i
@@ -173,6 +187,7 @@ src/CDCL.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/CDCL.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/CDCL.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/CDCL.cpp.i
 .PHONY : src/CDCL.cpp.i
 
 src/CDCL.s: src/CDCL.cpp.s
@@ -183,6 +198,7 @@ src/CDCL.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/CDCL.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/CDCL.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/CDCL.cpp.s
 .PHONY : src/CDCL.cpp.s
 
 src/CDCLSolverIncremental.o: src/CDCLSolverIncremental.cpp.o
@@ -193,6 +209,7 @@ src/CDCLSolverIncremental.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/CDCLSolverIncremental.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/CDCLSolverIncremental.cpp.o
 .PHONY : src/CDCLSolverIncremental.cpp.o
 
 src/CDCLSolverIncremental.i: src/CDCLSolverIncremental.cpp.i
@@ -203,6 +220,7 @@ src/CDCLSolverIncremental.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/CDCLSolverIncremental.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/CDCLSolverIncremental.cpp.i
 .PHONY : src/CDCLSolverIncremental.cpp.i
 
 src/CDCLSolverIncremental.s: src/CDCLSolverIncremental.cpp.s
@@ -213,6 +231,7 @@ src/CDCLSolverIncremental.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/CDCLSolverIncremental.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/CDCLSolverIncremental.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/CDCLSolverIncremental.cpp.s
 .PHONY : src/CDCLSolverIncremental.cpp.s
 
 src/ClauseDatabase.o: src/ClauseDatabase.cpp.o
@@ -223,6 +242,7 @@ src/ClauseDatabase.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/ClauseDatabase.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/ClauseDatabase.cpp.o
 .PHONY : src/ClauseDatabase.cpp.o
 
 src/ClauseDatabase.i: src/ClauseDatabase.cpp.i
@@ -233,6 +253,7 @@ src/ClauseDatabase.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/ClauseDatabase.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/ClauseDatabase.cpp.i
 .PHONY : src/ClauseDatabase.cpp.i
 
 src/ClauseDatabase.s: src/ClauseDatabase.cpp.s
@@ -243,6 +264,7 @@ src/ClauseDatabase.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/ClauseDatabase.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/ClauseDatabase.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/ClauseDatabase.cpp.s
 .PHONY : src/ClauseDatabase.cpp.s
 
 src/ClauseMinimizer.o: src/ClauseMinimizer.cpp.o
@@ -253,6 +275,7 @@ src/ClauseMinimizer.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/ClauseMinimizer.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/ClauseMinimizer.cpp.o
 .PHONY : src/ClauseMinimizer.cpp.o
 
 src/ClauseMinimizer.i: src/ClauseMinimizer.cpp.i
@@ -263,6 +286,7 @@ src/ClauseMinimizer.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/ClauseMinimizer.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/ClauseMinimizer.cpp.i
 .PHONY : src/ClauseMinimizer.cpp.i
 
 src/ClauseMinimizer.s: src/ClauseMinimizer.cpp.s
@@ -273,6 +297,7 @@ src/ClauseMinimizer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/ClauseMinimizer.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/ClauseMinimizer.cpp.s
 .PHONY : src/ClauseMinimizer.cpp.s
 
 src/DPLL.o: src/DPLL.cpp.o
@@ -283,6 +308,7 @@ src/DPLL.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/DPLL.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/DPLL.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/DPLL.cpp.o
 .PHONY : src/DPLL.cpp.o
 
 src/DPLL.i: src/DPLL.cpp.i
@@ -293,6 +319,7 @@ src/DPLL.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/DPLL.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/DPLL.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/DPLL.cpp.i
 .PHONY : src/DPLL.cpp.i
 
 src/DPLL.s: src/DPLL.cpp.s
@@ -303,6 +330,7 @@ src/DPLL.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/DPLL.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/DPLL.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/DPLL.cpp.s
 .PHONY : src/DPLL.cpp.s
 
 src/PortfolioManager.o: src/PortfolioManager.cpp.o
@@ -313,6 +341,7 @@ src/PortfolioManager.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/PortfolioManager.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/PortfolioManager.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/PortfolioManager.cpp.o
 .PHONY : src/PortfolioManager.cpp.o
 
 src/PortfolioManager.i: src/PortfolioManager.cpp.i
@@ -323,6 +352,7 @@ src/PortfolioManager.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/PortfolioManager.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/PortfolioManager.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/PortfolioManager.cpp.i
 .PHONY : src/PortfolioManager.cpp.i
 
 src/PortfolioManager.s: src/PortfolioManager.cpp.s
@@ -333,7 +363,41 @@ src/PortfolioManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/PortfolioManager.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/PortfolioManager.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/PortfolioManager.cpp.s
 .PHONY : src/PortfolioManager.cpp.s
+
+src/Preprocessor.o: src/Preprocessor.cpp.o
+.PHONY : src/Preprocessor.o
+
+# target to build an object file
+src/Preprocessor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/Preprocessor.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/Preprocessor.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/Preprocessor.cpp.o
+.PHONY : src/Preprocessor.cpp.o
+
+src/Preprocessor.i: src/Preprocessor.cpp.i
+.PHONY : src/Preprocessor.i
+
+# target to preprocess a source file
+src/Preprocessor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/Preprocessor.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/Preprocessor.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/Preprocessor.cpp.i
+.PHONY : src/Preprocessor.cpp.i
+
+src/Preprocessor.s: src/Preprocessor.cpp.s
+.PHONY : src/Preprocessor.s
+
+# target to generate assembly for a file
+src/Preprocessor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/Preprocessor.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/Preprocessor.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/Preprocessor.cpp.s
+.PHONY : src/Preprocessor.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -407,6 +471,30 @@ src/main_portfolio.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.s
 .PHONY : src/main_portfolio.cpp.s
 
+src/main_preprocessor.o: src/main_preprocessor.cpp.o
+.PHONY : src/main_preprocessor.o
+
+# target to build an object file
+src/main_preprocessor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/main_preprocessor.cpp.o
+.PHONY : src/main_preprocessor.cpp.o
+
+src/main_preprocessor.i: src/main_preprocessor.cpp.i
+.PHONY : src/main_preprocessor.i
+
+# target to preprocess a source file
+src/main_preprocessor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/main_preprocessor.cpp.i
+.PHONY : src/main_preprocessor.cpp.i
+
+src/main_preprocessor.s: src/main_preprocessor.cpp.s
+.PHONY : src/main_preprocessor.s
+
+# target to generate assembly for a file
+src/main_preprocessor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/main_preprocessor.cpp.s
+.PHONY : src/main_preprocessor.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -418,6 +506,7 @@ help:
 	@echo "... sat_solver"
 	@echo "... sat_solver_incremental"
 	@echo "... sat_solver_portfolio"
+	@echo "... sat_solver_preprocessor"
 	@echo "... src/CDCL.o"
 	@echo "... src/CDCL.i"
 	@echo "... src/CDCL.s"
@@ -436,6 +525,9 @@ help:
 	@echo "... src/PortfolioManager.o"
 	@echo "... src/PortfolioManager.i"
 	@echo "... src/PortfolioManager.s"
+	@echo "... src/Preprocessor.o"
+	@echo "... src/Preprocessor.i"
+	@echo "... src/Preprocessor.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
@@ -445,6 +537,9 @@ help:
 	@echo "... src/main_portfolio.o"
 	@echo "... src/main_portfolio.i"
 	@echo "... src/main_portfolio.s"
+	@echo "... src/main_preprocessor.o"
+	@echo "... src/main_preprocessor.i"
+	@echo "... src/main_preprocessor.s"
 .PHONY : help
 
 

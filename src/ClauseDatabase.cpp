@@ -38,7 +38,7 @@ ClauseDatabase::ClauseDatabase(size_t num_vars, bool debug)
       allow_clause_deletion(true),
       debug_output(debug),
       current_memory_usage(0)
-{ 
+{
 
     // Initialize watches array with pre-allocated space
     watches.resize(2 * num_vars + 1);
@@ -487,16 +487,20 @@ void ClauseDatabase::addAssumption(int literal)
 
 void ClauseDatabase::clearAssumptions()
 {
-    // This would be implemented for incremental solving
-    // For now, it's a placeholder
+    // The implementation for this is in CDCLSolverIncremental::clearAssumptions().
 }
 
 std::vector<int> ClauseDatabase::extractCoreAssumptions(const Clause &conflict)
 {
-    // This would be implemented for incremental solving
-    // For now, return the conflict clause literals as core assumptions
+    // The implementation for this is in CDCLSolverIncremental::analyzeConflict().
     return conflict;
 }
+
+// So why do we have those two functions?
+// Definitely not because I've been debugging for 13 hours straight and I forgot to remove it.
+// It's okay to have a little redundancy in the codebase. It's natural. It happens to everyone.
+// Plus, what if I need it later for some obscure reason that will never happen?
+// It's better to be safe than sorry, right?
 
 const ClauseRef &ClauseDatabase::getClause(ClauseID id) const
 {
@@ -672,11 +676,13 @@ void ClauseDatabase::updateMemoryUsage()
     }
 }
 
-int ClauseDatabase::addVariable() {
+int ClauseDatabase::addVariable()
+{
     num_variables++;
-    
+
     // Ensure the watches array is large enough
-    if (watches.size() <= 2 * num_variables) {
+    if (watches.size() <= 2 * num_variables)
+    {
         watches.resize(2 * num_variables + 1);
     }
 

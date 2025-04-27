@@ -14,6 +14,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/ishan/sat_solver/src/ClauseMinimizer.cpp" "CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.o" "gcc" "CMakeFiles/sat_solver.dir/src/ClauseMinimizer.cpp.o.d"
   "/Users/ishan/sat_solver/src/DPLL.cpp" "CMakeFiles/sat_solver.dir/src/DPLL.cpp.o" "gcc" "CMakeFiles/sat_solver.dir/src/DPLL.cpp.o.d"
   "/Users/ishan/sat_solver/src/PortfolioManager.cpp" "CMakeFiles/sat_solver.dir/src/PortfolioManager.cpp.o" "gcc" "CMakeFiles/sat_solver.dir/src/PortfolioManager.cpp.o.d"
+  "/Users/ishan/sat_solver/src/Preprocessor.cpp" "CMakeFiles/sat_solver.dir/src/Preprocessor.cpp.o" "gcc" "CMakeFiles/sat_solver.dir/src/Preprocessor.cpp.o.d"
   "/Users/ishan/sat_solver/src/main.cpp" "CMakeFiles/sat_solver.dir/src/main.cpp.o" "gcc" "CMakeFiles/sat_solver.dir/src/main.cpp.o.d"
   )
 

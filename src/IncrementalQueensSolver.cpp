@@ -4,6 +4,9 @@
 #include <iomanip>
 #include "../include/CDCLSolverIncremental.h"
 
+// I don't think I've used this specific solver at all for benchmarking.
+// But it's a good showcase of the ability to extend the incremental solver.
+
 // Class for incrementally solving N-Queens problems
 class IncrementalQueensSolver
 {

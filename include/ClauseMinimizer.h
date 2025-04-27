@@ -3,7 +3,7 @@
 
 #include "SATInstance.h"
 #include "ClauseDatabase.h"
-#include "CDCLSolverIncremental.h" // Include this to get ImplicationNodeIncremental definition
+#include "CDCLSolverIncremental.h" // ImplicationNodeIncremental definition
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
