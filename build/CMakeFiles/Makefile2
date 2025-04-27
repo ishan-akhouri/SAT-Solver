@@ -54,10 +54,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/ishan/sat_solver
+CMAKE_SOURCE_DIR = /Users/ishan/projects/sat_solver
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/ishan/sat_solver/build
+CMAKE_BINARY_DIR = /Users/ishan/projects/sat_solver/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -67,6 +67,7 @@ all: CMakeFiles/sat_solver.dir/all
 all: CMakeFiles/sat_solver_incremental.dir/all
 all: CMakeFiles/sat_solver_portfolio.dir/all
 all: CMakeFiles/sat_solver_preprocessor.dir/all
+all: CMakeFiles/maxsat_solver.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
@@ -74,6 +75,7 @@ codegen: CMakeFiles/sat_solver.dir/codegen
 codegen: CMakeFiles/sat_solver_incremental.dir/codegen
 codegen: CMakeFiles/sat_solver_portfolio.dir/codegen
 codegen: CMakeFiles/sat_solver_preprocessor.dir/codegen
+codegen: CMakeFiles/maxsat_solver.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -85,6 +87,7 @@ clean: CMakeFiles/sat_solver.dir/clean
 clean: CMakeFiles/sat_solver_incremental.dir/clean
 clean: CMakeFiles/sat_solver_portfolio.dir/clean
 clean: CMakeFiles/sat_solver_preprocessor.dir/clean
+clean: CMakeFiles/maxsat_solver.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -94,14 +97,14 @@ clean: CMakeFiles/sat_solver_preprocessor.dir/clean
 CMakeFiles/sat_solver.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9 "Built target sat_solver"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=12,13,14,15,16,17,18,19,20,21,22 "Built target sat_solver"
 .PHONY : CMakeFiles/sat_solver.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/sat_solver.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/sat_solver/build/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/projects/sat_solver/build/CMakeFiles 11
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/sat_solver.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/sat_solver/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/projects/sat_solver/build/CMakeFiles 0
 .PHONY : CMakeFiles/sat_solver.dir/rule
 
 # Convenience name for target.
@@ -111,7 +114,7 @@ sat_solver: CMakeFiles/sat_solver.dir/rule
 # codegen rule for target.
 CMakeFiles/sat_solver.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9 "Finished codegen for target sat_solver"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=12,13,14,15,16,17,18,19,20,21,22 "Finished codegen for target sat_solver"
 .PHONY : CMakeFiles/sat_solver.dir/codegen
 
 # clean rule for target.
@@ -126,14 +129,14 @@ CMakeFiles/sat_solver.dir/clean:
 CMakeFiles/sat_solver_incremental.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=10,11,12,13,14,15,16,17,18 "Built target sat_solver_incremental"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=23,24,25,26,27,28,29,30,31,32,33 "Built target sat_solver_incremental"
 .PHONY : CMakeFiles/sat_solver_incremental.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/sat_solver_incremental.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/sat_solver/build/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/projects/sat_solver/build/CMakeFiles 11
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/sat_solver_incremental.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/sat_solver/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/projects/sat_solver/build/CMakeFiles 0
 .PHONY : CMakeFiles/sat_solver_incremental.dir/rule
 
 # Convenience name for target.
@@ -143,7 +146,7 @@ sat_solver_incremental: CMakeFiles/sat_solver_incremental.dir/rule
 # codegen rule for target.
 CMakeFiles/sat_solver_incremental.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=10,11,12,13,14,15,16,17,18 "Finished codegen for target sat_solver_incremental"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=23,24,25,26,27,28,29,30,31,32,33 "Finished codegen for target sat_solver_incremental"
 .PHONY : CMakeFiles/sat_solver_incremental.dir/codegen
 
 # clean rule for target.
@@ -158,14 +161,14 @@ CMakeFiles/sat_solver_incremental.dir/clean:
 CMakeFiles/sat_solver_portfolio.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=19,20,21,22,23,24,25,26,27 "Built target sat_solver_portfolio"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=34,35,36,37,38,39,40,41,42,43,44 "Built target sat_solver_portfolio"
 .PHONY : CMakeFiles/sat_solver_portfolio.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/sat_solver_portfolio.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/sat_solver/build/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/projects/sat_solver/build/CMakeFiles 11
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/sat_solver_portfolio.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/sat_solver/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/projects/sat_solver/build/CMakeFiles 0
 .PHONY : CMakeFiles/sat_solver_portfolio.dir/rule
 
 # Convenience name for target.
@@ -175,7 +178,7 @@ sat_solver_portfolio: CMakeFiles/sat_solver_portfolio.dir/rule
 # codegen rule for target.
 CMakeFiles/sat_solver_portfolio.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=19,20,21,22,23,24,25,26,27 "Finished codegen for target sat_solver_portfolio"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=34,35,36,37,38,39,40,41,42,43,44 "Finished codegen for target sat_solver_portfolio"
 .PHONY : CMakeFiles/sat_solver_portfolio.dir/codegen
 
 # clean rule for target.
@@ -190,14 +193,14 @@ CMakeFiles/sat_solver_portfolio.dir/clean:
 CMakeFiles/sat_solver_preprocessor.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=28,29,30,31,32,33,34,35,36 "Built target sat_solver_preprocessor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=45,46,47,48,49,50,51,52,53,54,55 "Built target sat_solver_preprocessor"
 .PHONY : CMakeFiles/sat_solver_preprocessor.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/sat_solver_preprocessor.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/sat_solver/build/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/projects/sat_solver/build/CMakeFiles 11
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/sat_solver_preprocessor.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/sat_solver/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/projects/sat_solver/build/CMakeFiles 0
 .PHONY : CMakeFiles/sat_solver_preprocessor.dir/rule
 
 # Convenience name for target.
@@ -207,13 +210,45 @@ sat_solver_preprocessor: CMakeFiles/sat_solver_preprocessor.dir/rule
 # codegen rule for target.
 CMakeFiles/sat_solver_preprocessor.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=28,29,30,31,32,33,34,35,36 "Finished codegen for target sat_solver_preprocessor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=45,46,47,48,49,50,51,52,53,54,55 "Finished codegen for target sat_solver_preprocessor"
 .PHONY : CMakeFiles/sat_solver_preprocessor.dir/codegen
 
 # clean rule for target.
 CMakeFiles/sat_solver_preprocessor.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/clean
 .PHONY : CMakeFiles/sat_solver_preprocessor.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/maxsat_solver.dir
+
+# All Build rule for target.
+CMakeFiles/maxsat_solver.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Built target maxsat_solver"
+.PHONY : CMakeFiles/maxsat_solver.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/maxsat_solver.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/projects/sat_solver/build/CMakeFiles 11
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/maxsat_solver.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/projects/sat_solver/build/CMakeFiles 0
+.PHONY : CMakeFiles/maxsat_solver.dir/rule
+
+# Convenience name for target.
+maxsat_solver: CMakeFiles/maxsat_solver.dir/rule
+.PHONY : maxsat_solver
+
+# codegen rule for target.
+CMakeFiles/maxsat_solver.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Finished codegen for target maxsat_solver"
+.PHONY : CMakeFiles/maxsat_solver.dir/codegen
+
+# clean rule for target.
+CMakeFiles/maxsat_solver.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/clean
+.PHONY : CMakeFiles/maxsat_solver.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

@@ -57,10 +57,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/ishan/sat_solver
+CMAKE_SOURCE_DIR = /Users/ishan/projects/sat_solver
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/ishan/sat_solver/build
+CMAKE_BINARY_DIR = /Users/ishan/projects/sat_solver/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/sat_solver/build/CMakeFiles /Users/ishan/sat_solver/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/projects/sat_solver/build/CMakeFiles /Users/ishan/projects/sat_solver/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/sat_solver/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ishan/projects/sat_solver/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -168,6 +168,19 @@ sat_solver_preprocessor/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/build
 .PHONY : sat_solver_preprocessor/fast
 
+#=============================================================================
+# Target rules for targets named maxsat_solver
+
+# Build rule for target.
+maxsat_solver: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 maxsat_solver
+.PHONY : maxsat_solver
+
+# fast build rule for target.
+maxsat_solver/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/build
+.PHONY : maxsat_solver/fast
+
 src/CDCL.o: src/CDCL.cpp.o
 .PHONY : src/CDCL.o
 
@@ -177,6 +190,7 @@ src/CDCL.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/CDCL.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/CDCL.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/CDCL.cpp.o
 .PHONY : src/CDCL.cpp.o
 
 src/CDCL.i: src/CDCL.cpp.i
@@ -188,6 +202,7 @@ src/CDCL.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/CDCL.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/CDCL.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/CDCL.cpp.i
 .PHONY : src/CDCL.cpp.i
 
 src/CDCL.s: src/CDCL.cpp.s
@@ -199,6 +214,7 @@ src/CDCL.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/CDCL.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/CDCL.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/CDCL.cpp.s
 .PHONY : src/CDCL.cpp.s
 
 src/CDCLSolverIncremental.o: src/CDCLSolverIncremental.cpp.o
@@ -210,6 +226,7 @@ src/CDCLSolverIncremental.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/CDCLSolverIncremental.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/CDCLSolverIncremental.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/CDCLSolverIncremental.cpp.o
 .PHONY : src/CDCLSolverIncremental.cpp.o
 
 src/CDCLSolverIncremental.i: src/CDCLSolverIncremental.cpp.i
@@ -221,6 +238,7 @@ src/CDCLSolverIncremental.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/CDCLSolverIncremental.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/CDCLSolverIncremental.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/CDCLSolverIncremental.cpp.i
 .PHONY : src/CDCLSolverIncremental.cpp.i
 
 src/CDCLSolverIncremental.s: src/CDCLSolverIncremental.cpp.s
@@ -232,6 +250,7 @@ src/CDCLSolverIncremental.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/CDCLSolverIncremental.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/CDCLSolverIncremental.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/CDCLSolverIncremental.cpp.s
 .PHONY : src/CDCLSolverIncremental.cpp.s
 
 src/ClauseDatabase.o: src/ClauseDatabase.cpp.o
@@ -243,6 +262,7 @@ src/ClauseDatabase.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/ClauseDatabase.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/ClauseDatabase.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/ClauseDatabase.cpp.o
 .PHONY : src/ClauseDatabase.cpp.o
 
 src/ClauseDatabase.i: src/ClauseDatabase.cpp.i
@@ -254,6 +274,7 @@ src/ClauseDatabase.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/ClauseDatabase.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/ClauseDatabase.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/ClauseDatabase.cpp.i
 .PHONY : src/ClauseDatabase.cpp.i
 
 src/ClauseDatabase.s: src/ClauseDatabase.cpp.s
@@ -265,6 +286,7 @@ src/ClauseDatabase.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/ClauseDatabase.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/ClauseDatabase.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/ClauseDatabase.cpp.s
 .PHONY : src/ClauseDatabase.cpp.s
 
 src/ClauseMinimizer.o: src/ClauseMinimizer.cpp.o
@@ -276,6 +298,7 @@ src/ClauseMinimizer.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/ClauseMinimizer.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/ClauseMinimizer.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/ClauseMinimizer.cpp.o
 .PHONY : src/ClauseMinimizer.cpp.o
 
 src/ClauseMinimizer.i: src/ClauseMinimizer.cpp.i
@@ -287,6 +310,7 @@ src/ClauseMinimizer.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/ClauseMinimizer.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/ClauseMinimizer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/ClauseMinimizer.cpp.i
 .PHONY : src/ClauseMinimizer.cpp.i
 
 src/ClauseMinimizer.s: src/ClauseMinimizer.cpp.s
@@ -298,6 +322,7 @@ src/ClauseMinimizer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/ClauseMinimizer.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/ClauseMinimizer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/ClauseMinimizer.cpp.s
 .PHONY : src/ClauseMinimizer.cpp.s
 
 src/DPLL.o: src/DPLL.cpp.o
@@ -309,6 +334,7 @@ src/DPLL.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/DPLL.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/DPLL.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/DPLL.cpp.o
 .PHONY : src/DPLL.cpp.o
 
 src/DPLL.i: src/DPLL.cpp.i
@@ -320,6 +346,7 @@ src/DPLL.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/DPLL.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/DPLL.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/DPLL.cpp.i
 .PHONY : src/DPLL.cpp.i
 
 src/DPLL.s: src/DPLL.cpp.s
@@ -331,7 +358,44 @@ src/DPLL.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/DPLL.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/DPLL.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/DPLL.cpp.s
 .PHONY : src/DPLL.cpp.s
+
+src/MaxSATSolver.o: src/MaxSATSolver.cpp.o
+.PHONY : src/MaxSATSolver.o
+
+# target to build an object file
+src/MaxSATSolver.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/MaxSATSolver.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/MaxSATSolver.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/MaxSATSolver.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/MaxSATSolver.cpp.o
+.PHONY : src/MaxSATSolver.cpp.o
+
+src/MaxSATSolver.i: src/MaxSATSolver.cpp.i
+.PHONY : src/MaxSATSolver.i
+
+# target to preprocess a source file
+src/MaxSATSolver.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/MaxSATSolver.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/MaxSATSolver.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/MaxSATSolver.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/MaxSATSolver.cpp.i
+.PHONY : src/MaxSATSolver.cpp.i
+
+src/MaxSATSolver.s: src/MaxSATSolver.cpp.s
+.PHONY : src/MaxSATSolver.s
+
+# target to generate assembly for a file
+src/MaxSATSolver.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/MaxSATSolver.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/MaxSATSolver.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/MaxSATSolver.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/MaxSATSolver.cpp.s
+.PHONY : src/MaxSATSolver.cpp.s
 
 src/PortfolioManager.o: src/PortfolioManager.cpp.o
 .PHONY : src/PortfolioManager.o
@@ -342,6 +406,7 @@ src/PortfolioManager.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/PortfolioManager.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/PortfolioManager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/PortfolioManager.cpp.o
 .PHONY : src/PortfolioManager.cpp.o
 
 src/PortfolioManager.i: src/PortfolioManager.cpp.i
@@ -353,6 +418,7 @@ src/PortfolioManager.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/PortfolioManager.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/PortfolioManager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/PortfolioManager.cpp.i
 .PHONY : src/PortfolioManager.cpp.i
 
 src/PortfolioManager.s: src/PortfolioManager.cpp.s
@@ -364,6 +430,7 @@ src/PortfolioManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/PortfolioManager.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/PortfolioManager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/PortfolioManager.cpp.s
 .PHONY : src/PortfolioManager.cpp.s
 
 src/Preprocessor.o: src/Preprocessor.cpp.o
@@ -375,6 +442,7 @@ src/Preprocessor.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/Preprocessor.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/Preprocessor.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/Preprocessor.cpp.o
 .PHONY : src/Preprocessor.cpp.o
 
 src/Preprocessor.i: src/Preprocessor.cpp.i
@@ -386,6 +454,7 @@ src/Preprocessor.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/Preprocessor.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/Preprocessor.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/Preprocessor.cpp.i
 .PHONY : src/Preprocessor.cpp.i
 
 src/Preprocessor.s: src/Preprocessor.cpp.s
@@ -397,7 +466,44 @@ src/Preprocessor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/Preprocessor.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/Preprocessor.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/Preprocessor.cpp.s
 .PHONY : src/Preprocessor.cpp.s
+
+src/WeightedMaxSATSolver.o: src/WeightedMaxSATSolver.cpp.o
+.PHONY : src/WeightedMaxSATSolver.o
+
+# target to build an object file
+src/WeightedMaxSATSolver.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/WeightedMaxSATSolver.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/WeightedMaxSATSolver.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/WeightedMaxSATSolver.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/WeightedMaxSATSolver.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/WeightedMaxSATSolver.cpp.o
+.PHONY : src/WeightedMaxSATSolver.cpp.o
+
+src/WeightedMaxSATSolver.i: src/WeightedMaxSATSolver.cpp.i
+.PHONY : src/WeightedMaxSATSolver.i
+
+# target to preprocess a source file
+src/WeightedMaxSATSolver.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/WeightedMaxSATSolver.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/WeightedMaxSATSolver.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/WeightedMaxSATSolver.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/WeightedMaxSATSolver.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/WeightedMaxSATSolver.cpp.i
+.PHONY : src/WeightedMaxSATSolver.cpp.i
+
+src/WeightedMaxSATSolver.s: src/WeightedMaxSATSolver.cpp.s
+.PHONY : src/WeightedMaxSATSolver.s
+
+# target to generate assembly for a file
+src/WeightedMaxSATSolver.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/WeightedMaxSATSolver.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/WeightedMaxSATSolver.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/WeightedMaxSATSolver.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/WeightedMaxSATSolver.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/WeightedMaxSATSolver.cpp.s
+.PHONY : src/WeightedMaxSATSolver.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -446,6 +552,30 @@ src/main_incremental.s: src/main_incremental.cpp.s
 src/main_incremental.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/main_incremental.cpp.s
 .PHONY : src/main_incremental.cpp.s
+
+src/main_maxsat.o: src/main_maxsat.cpp.o
+.PHONY : src/main_maxsat.o
+
+# target to build an object file
+src/main_maxsat.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/main_maxsat.cpp.o
+.PHONY : src/main_maxsat.cpp.o
+
+src/main_maxsat.i: src/main_maxsat.cpp.i
+.PHONY : src/main_maxsat.i
+
+# target to preprocess a source file
+src/main_maxsat.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/main_maxsat.cpp.i
+.PHONY : src/main_maxsat.cpp.i
+
+src/main_maxsat.s: src/main_maxsat.cpp.s
+.PHONY : src/main_maxsat.s
+
+# target to generate assembly for a file
+src/main_maxsat.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/main_maxsat.cpp.s
+.PHONY : src/main_maxsat.cpp.s
 
 src/main_portfolio.o: src/main_portfolio.cpp.o
 .PHONY : src/main_portfolio.o
@@ -503,6 +633,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... maxsat_solver"
 	@echo "... sat_solver"
 	@echo "... sat_solver_incremental"
 	@echo "... sat_solver_portfolio"
@@ -522,18 +653,27 @@ help:
 	@echo "... src/DPLL.o"
 	@echo "... src/DPLL.i"
 	@echo "... src/DPLL.s"
+	@echo "... src/MaxSATSolver.o"
+	@echo "... src/MaxSATSolver.i"
+	@echo "... src/MaxSATSolver.s"
 	@echo "... src/PortfolioManager.o"
 	@echo "... src/PortfolioManager.i"
 	@echo "... src/PortfolioManager.s"
 	@echo "... src/Preprocessor.o"
 	@echo "... src/Preprocessor.i"
 	@echo "... src/Preprocessor.s"
+	@echo "... src/WeightedMaxSATSolver.o"
+	@echo "... src/WeightedMaxSATSolver.i"
+	@echo "... src/WeightedMaxSATSolver.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
 	@echo "... src/main_incremental.o"
 	@echo "... src/main_incremental.i"
 	@echo "... src/main_incremental.s"
+	@echo "... src/main_maxsat.o"
+	@echo "... src/main_maxsat.i"
+	@echo "... src/main_maxsat.s"
 	@echo "... src/main_portfolio.o"
 	@echo "... src/main_portfolio.i"
 	@echo "... src/main_portfolio.s"

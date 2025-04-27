@@ -1,6 +1,7 @@
-/Users/ishan/sat_solver/build/CMakeFiles/sat_solver.dir
-/Users/ishan/sat_solver/build/CMakeFiles/sat_solver_incremental.dir
-/Users/ishan/sat_solver/build/CMakeFiles/sat_solver_portfolio.dir
-/Users/ishan/sat_solver/build/CMakeFiles/sat_solver_preprocessor.dir
-/Users/ishan/sat_solver/build/CMakeFiles/edit_cache.dir
-/Users/ishan/sat_solver/build/CMakeFiles/rebuild_cache.dir
+/Users/ishan/projects/sat_solver/build/CMakeFiles/sat_solver.dir
+/Users/ishan/projects/sat_solver/build/CMakeFiles/sat_solver_incremental.dir
+/Users/ishan/projects/sat_solver/build/CMakeFiles/sat_solver_portfolio.dir
+/Users/ishan/projects/sat_solver/build/CMakeFiles/sat_solver_preprocessor.dir
+/Users/ishan/projects/sat_solver/build/CMakeFiles/maxsat_solver.dir
+/Users/ishan/projects/sat_solver/build/CMakeFiles/edit_cache.dir
+/Users/ishan/projects/sat_solver/build/CMakeFiles/rebuild_cache.dir

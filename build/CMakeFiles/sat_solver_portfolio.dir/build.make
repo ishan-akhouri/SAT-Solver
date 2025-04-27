@@ -53,10 +53,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/ishan/sat_solver
+CMAKE_SOURCE_DIR = /Users/ishan/projects/sat_solver
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/ishan/sat_solver/build
+CMAKE_BINARY_DIR = /Users/ishan/projects/sat_solver/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/sat_solver_portfolio.dir/depend.make
@@ -73,116 +73,144 @@ CMakeFiles/sat_solver_portfolio.dir/codegen:
 .PHONY : CMakeFiles/sat_solver_portfolio.dir/codegen
 
 CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.o: CMakeFiles/sat_solver_portfolio.dir/flags.make
-CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.o: /Users/ishan/sat_solver/src/main_portfolio.cpp
+CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.o: /Users/ishan/projects/sat_solver/src/main_portfolio.cpp
 CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.o: CMakeFiles/sat_solver_portfolio.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.o -MF CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.o.d -o CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.o -c /Users/ishan/sat_solver/src/main_portfolio.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.o -MF CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.o.d -o CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.o -c /Users/ishan/projects/sat_solver/src/main_portfolio.cpp
 
 CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/sat_solver/src/main_portfolio.cpp > CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/projects/sat_solver/src/main_portfolio.cpp > CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.i
 
 CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/sat_solver/src/main_portfolio.cpp -o CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/projects/sat_solver/src/main_portfolio.cpp -o CMakeFiles/sat_solver_portfolio.dir/src/main_portfolio.cpp.s
 
 CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.o: CMakeFiles/sat_solver_portfolio.dir/flags.make
-CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.o: /Users/ishan/sat_solver/src/DPLL.cpp
+CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.o: /Users/ishan/projects/sat_solver/src/DPLL.cpp
 CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.o: CMakeFiles/sat_solver_portfolio.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.o -MF CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.o.d -o CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.o -c /Users/ishan/sat_solver/src/DPLL.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.o -MF CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.o.d -o CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.o -c /Users/ishan/projects/sat_solver/src/DPLL.cpp
 
 CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/sat_solver/src/DPLL.cpp > CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/projects/sat_solver/src/DPLL.cpp > CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.i
 
 CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/sat_solver/src/DPLL.cpp -o CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/projects/sat_solver/src/DPLL.cpp -o CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.s
 
 CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.o: CMakeFiles/sat_solver_portfolio.dir/flags.make
-CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.o: /Users/ishan/sat_solver/src/CDCL.cpp
+CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.o: /Users/ishan/projects/sat_solver/src/CDCL.cpp
 CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.o: CMakeFiles/sat_solver_portfolio.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.o -MF CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.o.d -o CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.o -c /Users/ishan/sat_solver/src/CDCL.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.o -MF CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.o.d -o CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.o -c /Users/ishan/projects/sat_solver/src/CDCL.cpp
 
 CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/sat_solver/src/CDCL.cpp > CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/projects/sat_solver/src/CDCL.cpp > CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.i
 
 CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/sat_solver/src/CDCL.cpp -o CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/projects/sat_solver/src/CDCL.cpp -o CMakeFiles/sat_solver_portfolio.dir/src/CDCL.cpp.s
 
 CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.o: CMakeFiles/sat_solver_portfolio.dir/flags.make
-CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.o: /Users/ishan/sat_solver/src/ClauseDatabase.cpp
+CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.o: /Users/ishan/projects/sat_solver/src/ClauseDatabase.cpp
 CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.o: CMakeFiles/sat_solver_portfolio.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.o -MF CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.o.d -o CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.o -c /Users/ishan/sat_solver/src/ClauseDatabase.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.o -MF CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.o.d -o CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.o -c /Users/ishan/projects/sat_solver/src/ClauseDatabase.cpp
 
 CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/sat_solver/src/ClauseDatabase.cpp > CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/projects/sat_solver/src/ClauseDatabase.cpp > CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.i
 
 CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/sat_solver/src/ClauseDatabase.cpp -o CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/projects/sat_solver/src/ClauseDatabase.cpp -o CMakeFiles/sat_solver_portfolio.dir/src/ClauseDatabase.cpp.s
 
 CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.o: CMakeFiles/sat_solver_portfolio.dir/flags.make
-CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.o: /Users/ishan/sat_solver/src/CDCLSolverIncremental.cpp
+CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.o: /Users/ishan/projects/sat_solver/src/CDCLSolverIncremental.cpp
 CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.o: CMakeFiles/sat_solver_portfolio.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.o -MF CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.o.d -o CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.o -c /Users/ishan/sat_solver/src/CDCLSolverIncremental.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.o -MF CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.o.d -o CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.o -c /Users/ishan/projects/sat_solver/src/CDCLSolverIncremental.cpp
 
 CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/sat_solver/src/CDCLSolverIncremental.cpp > CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/projects/sat_solver/src/CDCLSolverIncremental.cpp > CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.i
 
 CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/sat_solver/src/CDCLSolverIncremental.cpp -o CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/projects/sat_solver/src/CDCLSolverIncremental.cpp -o CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.s
 
 CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.o: CMakeFiles/sat_solver_portfolio.dir/flags.make
-CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.o: /Users/ishan/sat_solver/src/ClauseMinimizer.cpp
+CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.o: /Users/ishan/projects/sat_solver/src/ClauseMinimizer.cpp
 CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.o: CMakeFiles/sat_solver_portfolio.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.o -MF CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.o.d -o CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.o -c /Users/ishan/sat_solver/src/ClauseMinimizer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.o -MF CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.o.d -o CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.o -c /Users/ishan/projects/sat_solver/src/ClauseMinimizer.cpp
 
 CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/sat_solver/src/ClauseMinimizer.cpp > CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/projects/sat_solver/src/ClauseMinimizer.cpp > CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.i
 
 CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/sat_solver/src/ClauseMinimizer.cpp -o CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/projects/sat_solver/src/ClauseMinimizer.cpp -o CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.s
 
 CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.o: CMakeFiles/sat_solver_portfolio.dir/flags.make
-CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.o: /Users/ishan/sat_solver/src/PortfolioManager.cpp
+CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.o: /Users/ishan/projects/sat_solver/src/PortfolioManager.cpp
 CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.o: CMakeFiles/sat_solver_portfolio.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.o -MF CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.o.d -o CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.o -c /Users/ishan/sat_solver/src/PortfolioManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.o -MF CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.o.d -o CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.o -c /Users/ishan/projects/sat_solver/src/PortfolioManager.cpp
 
 CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/sat_solver/src/PortfolioManager.cpp > CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/projects/sat_solver/src/PortfolioManager.cpp > CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.i
 
 CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/sat_solver/src/PortfolioManager.cpp -o CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/projects/sat_solver/src/PortfolioManager.cpp -o CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.s
 
 CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.o: CMakeFiles/sat_solver_portfolio.dir/flags.make
-CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.o: /Users/ishan/sat_solver/src/Preprocessor.cpp
+CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.o: /Users/ishan/projects/sat_solver/src/Preprocessor.cpp
 CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.o: CMakeFiles/sat_solver_portfolio.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.o -MF CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.o.d -o CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.o -c /Users/ishan/sat_solver/src/Preprocessor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.o -MF CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.o.d -o CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.o -c /Users/ishan/projects/sat_solver/src/Preprocessor.cpp
 
 CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/sat_solver/src/Preprocessor.cpp > CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/projects/sat_solver/src/Preprocessor.cpp > CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.i
 
 CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/sat_solver/src/Preprocessor.cpp -o CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/projects/sat_solver/src/Preprocessor.cpp -o CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.s
+
+CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.o: CMakeFiles/sat_solver_portfolio.dir/flags.make
+CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.o: /Users/ishan/projects/sat_solver/src/MaxSATSolver.cpp
+CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.o: CMakeFiles/sat_solver_portfolio.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.o -MF CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.o.d -o CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.o -c /Users/ishan/projects/sat_solver/src/MaxSATSolver.cpp
+
+CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/projects/sat_solver/src/MaxSATSolver.cpp > CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.i
+
+CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/projects/sat_solver/src/MaxSATSolver.cpp -o CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.s
+
+CMakeFiles/sat_solver_portfolio.dir/src/WeightedMaxSATSolver.cpp.o: CMakeFiles/sat_solver_portfolio.dir/flags.make
+CMakeFiles/sat_solver_portfolio.dir/src/WeightedMaxSATSolver.cpp.o: /Users/ishan/projects/sat_solver/src/WeightedMaxSATSolver.cpp
+CMakeFiles/sat_solver_portfolio.dir/src/WeightedMaxSATSolver.cpp.o: CMakeFiles/sat_solver_portfolio.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/sat_solver_portfolio.dir/src/WeightedMaxSATSolver.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sat_solver_portfolio.dir/src/WeightedMaxSATSolver.cpp.o -MF CMakeFiles/sat_solver_portfolio.dir/src/WeightedMaxSATSolver.cpp.o.d -o CMakeFiles/sat_solver_portfolio.dir/src/WeightedMaxSATSolver.cpp.o -c /Users/ishan/projects/sat_solver/src/WeightedMaxSATSolver.cpp
+
+CMakeFiles/sat_solver_portfolio.dir/src/WeightedMaxSATSolver.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sat_solver_portfolio.dir/src/WeightedMaxSATSolver.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ishan/projects/sat_solver/src/WeightedMaxSATSolver.cpp > CMakeFiles/sat_solver_portfolio.dir/src/WeightedMaxSATSolver.cpp.i
+
+CMakeFiles/sat_solver_portfolio.dir/src/WeightedMaxSATSolver.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sat_solver_portfolio.dir/src/WeightedMaxSATSolver.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ishan/projects/sat_solver/src/WeightedMaxSATSolver.cpp -o CMakeFiles/sat_solver_portfolio.dir/src/WeightedMaxSATSolver.cpp.s
 
 # Object files for target sat_solver_portfolio
 sat_solver_portfolio_OBJECTS = \
@@ -193,7 +221,9 @@ sat_solver_portfolio_OBJECTS = \
 "CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremental.cpp.o" \
 "CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.o" \
 "CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.o" \
-"CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.o"
+"CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.o" \
+"CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.o" \
+"CMakeFiles/sat_solver_portfolio.dir/src/WeightedMaxSATSolver.cpp.o"
 
 # External object files for target sat_solver_portfolio
 sat_solver_portfolio_EXTERNAL_OBJECTS =
@@ -206,9 +236,11 @@ sat_solver_portfolio: CMakeFiles/sat_solver_portfolio.dir/src/CDCLSolverIncremen
 sat_solver_portfolio: CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.o
 sat_solver_portfolio: CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.o
 sat_solver_portfolio: CMakeFiles/sat_solver_portfolio.dir/src/Preprocessor.cpp.o
+sat_solver_portfolio: CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.o
+sat_solver_portfolio: CMakeFiles/sat_solver_portfolio.dir/src/WeightedMaxSATSolver.cpp.o
 sat_solver_portfolio: CMakeFiles/sat_solver_portfolio.dir/build.make
 sat_solver_portfolio: CMakeFiles/sat_solver_portfolio.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/ishan/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable sat_solver_portfolio"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/ishan/projects/sat_solver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable sat_solver_portfolio"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/sat_solver_portfolio.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -220,6 +252,6 @@ CMakeFiles/sat_solver_portfolio.dir/clean:
 .PHONY : CMakeFiles/sat_solver_portfolio.dir/clean
 
 CMakeFiles/sat_solver_portfolio.dir/depend:
-	cd /Users/ishan/sat_solver/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/ishan/sat_solver /Users/ishan/sat_solver /Users/ishan/sat_solver/build /Users/ishan/sat_solver/build /Users/ishan/sat_solver/build/CMakeFiles/sat_solver_portfolio.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/ishan/projects/sat_solver/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/ishan/projects/sat_solver /Users/ishan/projects/sat_solver /Users/ishan/projects/sat_solver/build /Users/ishan/projects/sat_solver/build /Users/ishan/projects/sat_solver/build/CMakeFiles/sat_solver_portfolio.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/sat_solver_portfolio.dir/depend
 

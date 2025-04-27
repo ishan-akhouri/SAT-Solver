@@ -4,9 +4,9 @@
 # compile CXX with /Library/Developer/CommandLineTools/usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/ishan/sat_solver/include
+CXX_INCLUDES = -I/Users/ishan/projects/sat_solver/include
 
-CXX_FLAGSarm64 = -O3 -Wall -Wextra -pedantic -pthread -std=gnu++20 -arch arm64
+CXX_FLAGSarm64 = -O3 -Wall -Wextra -pedantic -pthread -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk
 
-CXX_FLAGS = -O3 -Wall -Wextra -pedantic -pthread -std=gnu++20 -arch arm64
+CXX_FLAGS = -O3 -Wall -Wextra -pedantic -pthread -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk
 

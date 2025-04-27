@@ -12,6 +12,8 @@ set(COMMON_SOURCES
     src/ClauseMinimizer.cpp
     src/PortfolioManager.cpp 
     src/Preprocessor.cpp
+    src/MaxSATSolver.cpp
+    src/WeightedMaxSATSolver.cpp
 )
 
 
@@ -22,3 +24,5 @@ add_executable(sat_solver_incremental src/main_incremental.cpp ${COMMON_SOURCES}
 add_executable(sat_solver_portfolio src/main_portfolio.cpp ${COMMON_SOURCES})
 
 add_executable(sat_solver_preprocessor src/main_preprocessor.cpp ${COMMON_SOURCES})
+
+add_executable(maxsat_solver src/main_maxsat.cpp ${COMMON_SOURCES})
