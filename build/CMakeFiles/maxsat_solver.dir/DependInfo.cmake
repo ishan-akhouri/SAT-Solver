@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/ishan/projects/sat_solver/src/ClauseDatabase.cpp" "CMakeFiles/maxsat_solver.dir/src/ClauseDatabase.cpp.o" "gcc" "CMakeFiles/maxsat_solver.dir/src/ClauseDatabase.cpp.o.d"
   "/Users/ishan/projects/sat_solver/src/ClauseMinimizer.cpp" "CMakeFiles/maxsat_solver.dir/src/ClauseMinimizer.cpp.o" "gcc" "CMakeFiles/maxsat_solver.dir/src/ClauseMinimizer.cpp.o.d"
   "/Users/ishan/projects/sat_solver/src/DPLL.cpp" "CMakeFiles/maxsat_solver.dir/src/DPLL.cpp.o" "gcc" "CMakeFiles/maxsat_solver.dir/src/DPLL.cpp.o.d"
+  "/Users/ishan/projects/sat_solver/src/HybridMaxSATSolver.cpp" "CMakeFiles/maxsat_solver.dir/src/HybridMaxSATSolver.cpp.o" "gcc" "CMakeFiles/maxsat_solver.dir/src/HybridMaxSATSolver.cpp.o.d"
   "/Users/ishan/projects/sat_solver/src/MaxSATSolver.cpp" "CMakeFiles/maxsat_solver.dir/src/MaxSATSolver.cpp.o" "gcc" "CMakeFiles/maxsat_solver.dir/src/MaxSATSolver.cpp.o.d"
   "/Users/ishan/projects/sat_solver/src/PortfolioManager.cpp" "CMakeFiles/maxsat_solver.dir/src/PortfolioManager.cpp.o" "gcc" "CMakeFiles/maxsat_solver.dir/src/PortfolioManager.cpp.o.d"
   "/Users/ishan/projects/sat_solver/src/Preprocessor.cpp" "CMakeFiles/maxsat_solver.dir/src/Preprocessor.cpp.o" "gcc" "CMakeFiles/maxsat_solver.dir/src/Preprocessor.cpp.o.d"

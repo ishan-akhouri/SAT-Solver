@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/sat_solver_portfolio.dir/src/ClauseMinimizer.cpp.o.d"
   "CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.o"
   "CMakeFiles/sat_solver_portfolio.dir/src/DPLL.cpp.o.d"
+  "CMakeFiles/sat_solver_portfolio.dir/src/HybridMaxSATSolver.cpp.o"
+  "CMakeFiles/sat_solver_portfolio.dir/src/HybridMaxSATSolver.cpp.o.d"
   "CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.o"
   "CMakeFiles/sat_solver_portfolio.dir/src/MaxSATSolver.cpp.o.d"
   "CMakeFiles/sat_solver_portfolio.dir/src/PortfolioManager.cpp.o"

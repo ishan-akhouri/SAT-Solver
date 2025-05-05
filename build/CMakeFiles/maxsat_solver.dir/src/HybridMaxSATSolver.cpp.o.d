@@ -1,5 +1,6 @@
-CMakeFiles/maxsat_solver.dir/src/MaxSATSolver.cpp.o: \
-  /Users/ishan/projects/sat_solver/src/MaxSATSolver.cpp \
+CMakeFiles/maxsat_solver.dir/src/HybridMaxSATSolver.cpp.o: \
+  /Users/ishan/projects/sat_solver/src/HybridMaxSATSolver.cpp \
+  /Users/ishan/projects/sat_solver/include/HybridMaxSATSolver.h \
   /Users/ishan/projects/sat_solver/include/MaxSATSolver.h \
   /Users/ishan/projects/sat_solver/include/CDCLSolverIncremental.h \
   /Users/ishan/projects/sat_solver/include/SATInstance.h \
@@ -965,4 +966,5 @@ CMakeFiles/maxsat_solver.dir/src/MaxSATSolver.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/charconv \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/__charconv/from_chars_integral.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/__charconv/from_chars_result.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/__charconv/to_chars.h
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/__charconv/to_chars.h \
+  /Users/ishan/projects/sat_solver/include/WeightedMaxSATSolver.h

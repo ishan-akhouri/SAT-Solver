@@ -1,51 +1,48 @@
 #ifndef MAXSAT_SOLVER_H
 #define MAXSAT_SOLVER_H
 
+#include "CDCLSolverIncremental.h"
 #include <vector>
 #include <unordered_map>
-#include "CDCLSolverIncremental.h"
-#include "SATInstance.h"
 
-class MaxSATSolver {
-private:
-    CDCLSolverIncremental solver;
-    std::vector<int> relaxation_vars;
-    std::vector<int> weights;  // For weighted MaxSAT
-    int next_var;
-    bool debug_output;
+// Type definitions from original code
+typedef std::vector<int> Clause;
+typedef std::vector<Clause> CNF;
 
+class MaxSATSolver
+{
 public:
-    MaxSATSolver(const CNF& hard_clauses, bool debug = false);
-    
-    // Add a soft clause with optional weight
-    void addSoftClause(const Clause& soft_clause, int weight = 1);
-    
-    // Add multiple soft clauses
-    void addSoftClauses(const CNF& soft_clauses, int weight = 1);
-    
-    // Linear search algorithm for MaxSAT
+    MaxSATSolver(const CNF &hard_clauses, bool debug = false);
+
+    void addSoftClause(const Clause &soft_clause, int weight = 1);
+    void addSoftClauses(const CNF &soft_clauses, int weight = 1);
+
     int solve();
-    
-    // Binary search algorithm for MaxSAT (more efficient)
     int solveBinarySearch();
-    
-    // Get the satisfying assignment
+
     std::unordered_map<int, bool> getAssignment() const;
-    
-    // Get statistics
+
     int getNumHardClauses() const;
     int getNumSoftClauses() const;
     int getNumVariables() const;
     int getNumSolverCalls() const;
-    
+
+    void setPreviousSolution(const std::unordered_map<int, bool> &solution);
+
 private:
-    int solver_calls;  // Counter for solver invocations
-    
-    // Helper method to create assumptions
     std::vector<int> createAssumptions(int k);
-    
-    // Helper method to solve with k relaxed clauses
-    bool solveWithKRelaxed(int k, std::vector<int>& assumptions);
+    bool solveWithKRelaxed(int k, std::vector<int> &assumptions);
+
+    CDCLSolverIncremental solver;
+    std::vector<int> relaxation_vars;
+    std::vector<int> weights;
+    int next_var;
+    bool debug_output;
+    int solver_calls;
+
+    // New variables for warm starting
+    std::unordered_map<int, bool> last_solution;
+    bool has_previous_solution;
 };
 
-#endif
+#endif // MAXSAT_SOLVER_H

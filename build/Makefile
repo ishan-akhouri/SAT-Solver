@@ -361,6 +361,42 @@ src/DPLL.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/DPLL.cpp.s
 .PHONY : src/DPLL.cpp.s
 
+src/HybridMaxSATSolver.o: src/HybridMaxSATSolver.cpp.o
+.PHONY : src/HybridMaxSATSolver.o
+
+# target to build an object file
+src/HybridMaxSATSolver.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/HybridMaxSATSolver.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/HybridMaxSATSolver.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/HybridMaxSATSolver.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/HybridMaxSATSolver.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/HybridMaxSATSolver.cpp.o
+.PHONY : src/HybridMaxSATSolver.cpp.o
+
+src/HybridMaxSATSolver.i: src/HybridMaxSATSolver.cpp.i
+.PHONY : src/HybridMaxSATSolver.i
+
+# target to preprocess a source file
+src/HybridMaxSATSolver.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/HybridMaxSATSolver.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/HybridMaxSATSolver.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/HybridMaxSATSolver.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/HybridMaxSATSolver.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/HybridMaxSATSolver.cpp.i
+.PHONY : src/HybridMaxSATSolver.cpp.i
+
+src/HybridMaxSATSolver.s: src/HybridMaxSATSolver.cpp.s
+.PHONY : src/HybridMaxSATSolver.s
+
+# target to generate assembly for a file
+src/HybridMaxSATSolver.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver.dir/build.make CMakeFiles/sat_solver.dir/src/HybridMaxSATSolver.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_incremental.dir/build.make CMakeFiles/sat_solver_incremental.dir/src/HybridMaxSATSolver.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_portfolio.dir/build.make CMakeFiles/sat_solver_portfolio.dir/src/HybridMaxSATSolver.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sat_solver_preprocessor.dir/build.make CMakeFiles/sat_solver_preprocessor.dir/src/HybridMaxSATSolver.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/maxsat_solver.dir/build.make CMakeFiles/maxsat_solver.dir/src/HybridMaxSATSolver.cpp.s
+.PHONY : src/HybridMaxSATSolver.cpp.s
+
 src/MaxSATSolver.o: src/MaxSATSolver.cpp.o
 .PHONY : src/MaxSATSolver.o
 
@@ -653,6 +689,9 @@ help:
 	@echo "... src/DPLL.o"
 	@echo "... src/DPLL.i"
 	@echo "... src/DPLL.s"
+	@echo "... src/HybridMaxSATSolver.o"
+	@echo "... src/HybridMaxSATSolver.i"
+	@echo "... src/HybridMaxSATSolver.s"
 	@echo "... src/MaxSATSolver.o"
 	@echo "... src/MaxSATSolver.i"
 	@echo "... src/MaxSATSolver.s"

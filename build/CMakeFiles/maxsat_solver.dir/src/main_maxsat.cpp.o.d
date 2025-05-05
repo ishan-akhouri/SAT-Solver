@@ -1032,9 +1032,12 @@ CMakeFiles/maxsat_solver.dir/src/main_maxsat.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/__filesystem/path_iterator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/__filesystem/recursive_directory_iterator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/__filesystem/u8path.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/unordered_set \
   /Users/ishan/projects/sat_solver/include/MaxSATSolver.h \
   /Users/ishan/projects/sat_solver/include/CDCLSolverIncremental.h \
   /Users/ishan/projects/sat_solver/include/SATInstance.h \
   /Users/ishan/projects/sat_solver/include/ClauseDatabase.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/unordered_set \
-  /Users/ishan/projects/sat_solver/include/WeightedMaxSATSolver.h
+  /Users/ishan/projects/sat_solver/include/WeightedMaxSATSolver.h \
+  /Users/ishan/projects/sat_solver/include/HybridMaxSATSolver.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/set \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/__tree

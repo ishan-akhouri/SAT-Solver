@@ -1,16 +1,17 @@
-# Advanced SAT Solver with DPLL, CDCL, Incremental Solving, Preprocessing and Portfolio Parallelism
+# Advanced SAT/MaxSAT Solver with DPLL, CDCL, Incremental Solving, Preprocessing and Portfolio Parallelism
 
-A C++ implementation of modern SAT solving algorithms for Boolean satisfiability problems, featuring DPLL with VSIDS, a full CDCL implementation with non-chronological backtracking, a state-of-the-art incremental SAT solver with sophisticated clause database management, advanced preprocessing techniques, and a parallel portfolio-based approach for handling challenging instances.
+A C++ implementation of modern SAT solving algorithms for Boolean satisfiability problems, featuring DPLL with VSIDS, a full CDCL implementation with non-chronological backtracking, a state-of-the-art incremental SAT solver with sophisticated clause database management, advanced preprocessing techniques, a parallel portfolio-based approach for handling challenging instances, and a hybrid MaxSAT solver for optimization problems.
 
 ## Overview
 
-This SAT solver efficiently determines whether a given Boolean formula in conjunctive normal form (CNF) is satisfiable. The implementation includes five major solving approaches:
+This SAT solver efficiently determines whether a given Boolean formula in conjunctive normal form (CNF) is satisfiable. The implementation includes six major solving approaches:
 
 1. **DPLL Algorithm with VSIDS**: The classic Davis–Putnam–Logemann–Loveland algorithm enhanced with Variable State Independent Decaying Sum heuristic
 2. **CDCL with Non-Chronological Backtracking**: A modern Conflict-Driven Clause Learning implementation that significantly outperforms DPLL on complex problems
 3. **Incremental CDCL Solver**: A sophisticated incremental solver with reference-counted clause database management, optimized for solving sequences of related formulas efficiently
 4. **Advanced Preprocessing Suite**: Problem-specific preprocessing techniques that significantly reduce formula size before solving
 5. **Portfolio-based Parallel Solver**: A multi-configuration parallel approach that runs diverse solver instances simultaneously to tackle hard problems efficiently
+6. **Hybrid MaxSAT Solver**: An intelligent solver for Maximum Satisfiability problems that automatically selects the most efficient solving strategy based on problem characteristics
 
 ## Features
 
@@ -89,6 +90,33 @@ This SAT solver efficiently determines whether a given Boolean formula in conjun
 - **Robust timeout handling** to prevent excessive runtime
 - **Comprehensive statistics** for solver performance analysis and comparison
 
+### Hybrid MaxSAT Solver
+- **Intelligent algorithm selection** based on problem characteristics:
+  - **Statistical analysis** of problem structure to select optimal solving strategy
+  - Automatic detection of weighted vs. unweighted problems
+  - Clause-to-variable ratio analysis for phase transition awareness
+  - Weight distribution analysis for optimal strategy selection in weighted problems
+  - Clause size and density metrics to guide algorithm choice
+- **Multiple solving strategies**:
+  - **Linear search**: Optimal for very small problems with few soft clauses
+  - **Binary search with exponential probing**: Efficient for unweighted problems and certain weighted instances
+  - **Stratified approach**: Specialized for weighted problems with diverse weight distributions
+- **Performance optimizations**:
+  - Adaptive search bounds based on problem properties
+  - Early estimation techniques to quickly find good upper bounds
+  - Smart clause selection for weighted problems
+  - Efficient handling of uniform weight distributions
+- **Comprehensive benchmarking suite**:
+  - Vertex cover problems
+  - Maximum independent set problems
+  - Graph coloring problems
+  - Scheduling problems
+  - Incremental problem solving tests
+- **Configuration system**:
+  - Customizable solver parameters
+  - Force specific algorithms for testing and comparison
+  - Adjustable heuristics and search parameters
+
 ### Performance Features
 - **Efficient memory management** with reference counting for clauses
 - **Sophisticated watch list implementation** for unit propagation
@@ -110,7 +138,10 @@ This SAT solver efficiently determines whether a given Boolean formula in conjun
 │   ├── ClauseDatabase.h          # Reference-counted clause database
 │   ├── ClauseMinimizer.h         # Clause minimization techniques
 │   ├── Preprocessor.h            # Formula preprocessing techniques
-│   └── PortfolioManager.h        # Portfolio-based parallel solver
+│   ├── PortfolioManager.h        # Portfolio-based parallel solver
+│   ├── MaxSATSolver.h            # MaxSAT solver using incremental SAT
+│   ├── WeightedMaxSATSolver.h    # Weighted MaxSAT solver
+│   └── HybridMaxSATSolver.h      # Intelligent MaxSAT algorithm selector
 ├── src/
 │   ├── DPLL.cpp                  # DPLL algorithm implementation
 │   ├── CDCL.cpp                  # CDCL algorithm implementation
@@ -119,10 +150,14 @@ This SAT solver efficiently determines whether a given Boolean formula in conjun
 │   ├── ClauseMinimizer.cpp       # Clause minimization techniques
 │   ├── Preprocessor.cpp          # Preprocessing implementation
 │   ├── PortfolioManager.cpp      # Portfolio-based parallel solver implementation
+│   ├── MaxSATSolver.cpp          # MaxSAT solver implementation
+│   ├── WeightedMaxSATSolver.cpp  # Weighted MaxSAT solver implementation
+│   ├── HybridMaxSATSolver.cpp    # Hybrid MaxSAT solver implementation
 │   ├── main.cpp                  # Main test harness for standard SAT solving
 │   ├── main_incremental.cpp      # Main test harness for incremental SAT solving
 │   ├── main_preprocessor.cpp     # Main test harness for preprocessing
 │   ├── main_portfolio.cpp        # Main test harness for portfolio solver
+│   ├── main_maxsat.cpp           # Main test harness for MaxSAT solving
 │   └── IncrementalQueensSolver.cpp # Example application (N-Queens)
 └── README.md
 ```
@@ -228,6 +263,47 @@ The portfolio-based parallel solver addresses challenging SAT instances by:
    - Identification of most effective strategies
 
 The portfolio approach is particularly effective for hard random instances and problems near the phase transition region where the optimal strategy is not known in advance.
+
+### Hybrid MaxSAT Solving
+
+The hybrid MaxSAT solver uses sophisticated problem analysis to automatically select the most efficient solving strategy:
+
+1. **Statistical Problem Analysis**:
+   - **Weight distribution analysis**: Computes mean, standard deviation, coefficient of variation, range ratio, and unique weight count
+   - **Clause density calculation**: Determines the ratio of clauses to variables
+   - **Clause size statistics**: Calculates average clause size across hard and soft clauses
+   - **Phase transition detection**: Recognizes problems near the critical clause-to-variable ratio (4.0-4.5)
+
+2. **Algorithm Selection Criteria**:
+   - **For weighted problems**:
+     - Few clauses or uniform weights → Binary search
+     - Low weight variance and small range ratio → Binary search
+     - Most other weighted problems → Stratified approach
+   - **For unweighted problems**:
+     - Very small problems with low density → Linear search
+     - Most unweighted problems → Binary search with exponential probing
+
+3. **Solving Strategies**:
+   - **Linear search**: Simple incremental approach that works well for very small problems
+   - **Binary search with exponential probing**:
+     - Initial bounds estimation using exponential steps
+     - Early estimation technique to quickly find upper bounds
+     - Binary search within identified bounds for optimal solution
+   - **Stratified approach for weighted problems**:
+     - Groups clauses by weight (highest first)
+     - Solves each weight group separately
+     - Accumulates solutions as hard constraints for subsequent groups
+     - Preserves solution quality while reducing solver calls
+
+4. **Performance Optimizations**:
+   - Adaptive step sizes for exponential probing
+   - Problem-specific initial estimation
+   - Smart clause selection for weighted problems
+   - Efficient handling of uniform weight distributions
+
+The hybrid approach consistently outperforms individual strategies across diverse problem types, demonstrating particularly impressive gains on weighted problems with complex weight distributions and unweighted problems near the phase transition region.
+
+> **Note on Warm Starting**: While our implementation includes warm starting capabilities to accelerate incremental solving, benchmarks revealed limited performance benefits in our context. This is primarily because our solver is optimized for one-shot solving speed rather than incremental features like phase saving, assumption handling, and core preservation that would make warm starting more effective. For most MaxSAT instances, the algorithm selection has a far greater impact on performance than warm starting.
 
 ### VSIDS (Variable State Independent Decaying Sum)
 
@@ -336,6 +412,27 @@ Run the program:
 ./sat_solver_portfolio config                  # Run configuration effectiveness benchmark
 ./sat_solver_portfolio custom 100 5 120        # Run custom benchmark (100 vars, 5 instances, 120s timeout)
 ./sat_solver_portfolio help                    # Show usage information
+```
+
+### MaxSAT Solver
+
+Compile the MaxSAT solver:
+
+```bash
+g++ -std=c++17 -o maxsat_solver src/main_maxsat.cpp src/MaxSATSolver.cpp src/WeightedMaxSATSolver.cpp src/HybridMaxSATSolver.cpp src/CDCLSolverIncremental.cpp src/ClauseDatabase.cpp -Iinclude
+```
+
+Run the program:
+
+```bash
+./maxsat_solver                            # Run all benchmarks
+./maxsat_solver small                      # Run small example tests
+./maxsat_solver vertex                     # Run vertex cover benchmarks
+./maxsat_solver independent                # Run maximum independent set benchmarks
+./maxsat_solver coloring                   # Run graph coloring benchmarks
+./maxsat_solver scheduling                 # Run scheduling problem benchmarks
+./maxsat_solver incremental                # Test incremental solving with warm starting
+./maxsat_solver custom vertices edges seed # Generate and solve custom problems
 ```
 
 ### Using the Solver in Your Code
@@ -452,6 +549,42 @@ int winning_solver = portfolio.getWinningSolverId();
 portfolio.printStatistics();
 ```
 
+#### Using the Hybrid MaxSAT Solver:
+
+```cpp
+#include "HybridMaxSATSolver.h"
+
+// Create hard clauses in CNF
+CNF hard_clauses = {{1, 2}, {-1, 3}, {-2, -3}};
+
+// Create the hybrid solver
+HybridMaxSATSolver solver(hard_clauses, false); // Set debug flag to false
+
+// Add soft clauses with weights
+solver.addSoftClause({-2}, 3);   // Prefer x2 = false with weight 3
+solver.addSoftClause({-3}, 1);   // Prefer x3 = false with weight 1
+solver.addSoftClause({4, 5}, 2); // Prefer x4 = true OR x5 = true with weight 2
+
+// Configure the solver (optional)
+HybridMaxSATSolver::Config config;
+config.use_warm_start = true;
+config.use_exponential_probe = true;
+solver.setConfig(config);
+
+// Solve - the algorithm is automatically selected based on the problem
+int result = solver.solve();
+
+// Get the optimal assignment if satisfiable
+if (result != -1) {
+    const auto& assignment = solver.getAssignment();
+    
+    std::cout << "Optimal solution with " << result << " weight violated:" << std::endl;
+    for (const auto& [var, value] : assignment) {
+        std::cout << "x" << var << " = " << (value ? "true" : "false") << std::endl;
+    }
+}
+```
+
 ## Example Input Format
 
 A Boolean formula in CNF is represented as a vector of clauses, where each clause is a vector of integers. Positive integers represent positive literals, and negative integers represent negated literals.
@@ -478,6 +611,10 @@ The program includes several test cases:
 11. **Configuration Effectiveness**: Analyzes which solver configurations perform best for different problem types
 12. **Preprocessing Effectiveness**: Tests impact of preprocessing across different problem types
 13. **Redundancy Handling**: Evaluates preprocessor on formulas with added redundant clauses
+14. **Vertex Cover Problems**: MaxSAT formulation of minimum vertex cover
+15. **Maximum Independent Set**: MaxSAT formulation of maximum independent set
+16. **Graph Coloring**: MaxSAT formulation of graph coloring with preferences
+17. **Scheduling Problems**: MaxSAT formulation of task scheduling with conflicts
 
 The random 3-SAT tests include instances around the phase transition (clause-to-variable ratio of approximately 4.25), where problems are typically hardest to solve.
 
@@ -523,6 +660,16 @@ For Portfolio-based Solver:
 - Resource utilization statistics
 - Load balancing effectiveness
 
+For Hybrid MaxSAT Solver:
+- Problem characteristic metrics (clause density, weight statistics)
+- Algorithm selection decisions
+- Solver calls per strategy
+- Execution time per strategy
+- Solution quality comparison
+- Speedup over baseline approaches
+- Weight distribution analysis effectiveness
+- Performance across different problem types
+
 ## Real-World Applications
 
 The different solver implementations are suited for various applications:
@@ -557,6 +704,18 @@ The different solver implementations are suited for various applications:
 - **Problem Structure Discovery**: Identify which solving strategies work best for specific problem classes
 - **SAT Competitions**: Gain robustness across diverse benchmark categories
 
+### Hybrid MaxSAT Solver
+- **Network Design**: Optimize network topology while satisfying connectivity constraints
+- **Project Scheduling**: Minimize resource conflicts while meeting deadlines
+- **Minimum Vertex Cover**: Find smallest vertex cover in graph theory applications
+- **Maximum Independent Set**: Identify largest independent set in graphs
+- **Routing Problems**: Optimize vehicle routes with mandatory constraints
+- **Resource Allocation**: Assign resources while minimizing conflicts
+- **Compiler Optimization**: Register allocation with spill minimization
+- **Pattern Matching**: Find best matches with structural constraints
+- **Bioinformatics**: Sequence alignment with structural constraints
+- **Electronic Design Automation**: Component placement with design rule constraints
+
 ## Next Steps
 
 Future enhancements planned for this solver include:
@@ -569,6 +728,12 @@ Future enhancements planned for this solver include:
 - **Machine Learning Integration**: Predict optimal solver configurations for given problem characteristics
 - **Enhanced Problem Detection**: More sophisticated structure detection algorithms
 - **Interactive Preprocessing Visualization**: Tools to understand formula simplification steps
+- **Hybrid MaxSAT Improvements**:
+  - Integration with the preprocessor suite for MaxSAT-specific preprocessing
+  - Unsatisfiable core-guided approach for weighted MaxSAT
+  - Parallel portfolio approach for MaxSAT
+  - More sophisticated statistical analysis of problem structure
+  - Support for partial MaxSAT and weighted partial MaxSAT
 
 ## License
 

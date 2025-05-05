@@ -1,6 +1,9 @@
 CMakeFiles/maxsat_solver.dir/src/WeightedMaxSATSolver.cpp.o: \
   /Users/ishan/projects/sat_solver/src/WeightedMaxSATSolver.cpp \
   /Users/ishan/projects/sat_solver/include/WeightedMaxSATSolver.h \
+  /Users/ishan/projects/sat_solver/include/MaxSATSolver.h \
+  /Users/ishan/projects/sat_solver/include/CDCLSolverIncremental.h \
+  /Users/ishan/projects/sat_solver/include/SATInstance.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/vector \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/__algorithm/copy.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/__algorithm/copy_move_common.h \
@@ -879,9 +882,6 @@ CMakeFiles/maxsat_solver.dir/src/WeightedMaxSATSolver.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/__iterator/erase_if_container.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/__iterator/ranges_iterator_traits.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/__node_handle \
-  /Users/ishan/projects/sat_solver/include/MaxSATSolver.h \
-  /Users/ishan/projects/sat_solver/include/CDCLSolverIncremental.h \
-  /Users/ishan/projects/sat_solver/include/SATInstance.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/istream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk/usr/include/c++/v1/__ostream/basic_ostream.h \

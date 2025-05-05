@@ -14,6 +14,7 @@ set(COMMON_SOURCES
     src/Preprocessor.cpp
     src/MaxSATSolver.cpp
     src/WeightedMaxSATSolver.cpp
+    src/HybridMaxSATSolver.cpp
 )
 
 
